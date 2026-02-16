@@ -31,7 +31,7 @@ const Contact: React.FC = () => {
 
                                 <div className="space-y-8">
                                     <div className="flex items-start gap-5 group">
-                                        <div className="w-14 h-14 bg-white shadow-md text-[#E31E24] rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:bg-[#E31E24] group-hover:text-white transition-all duration-300">
+                                        <div className="w-14 h-14 bg-white shadow-md text-[#E31E24] rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-[#E31E24] group-hover:text-white transition-all duration-300">
                                             <MapPin size={28} />
                                         </div>
                                         <div>
@@ -44,7 +44,7 @@ const Contact: React.FC = () => {
                                     </div>
 
                                     <div className="flex items-start gap-5 group">
-                                        <div className="w-14 h-14 bg-white shadow-md text-[#004A99] rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:bg-[#004A99] group-hover:text-white transition-all duration-300">
+                                        <div className="w-14 h-14 bg-white shadow-md text-[#004A99] rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-[#004A99] group-hover:text-white transition-all duration-300">
                                             <Phone size={28} />
                                         </div>
                                         <div>
@@ -55,7 +55,7 @@ const Contact: React.FC = () => {
                                     </div>
 
                                     <div className="flex items-start gap-5 group">
-                                        <div className="w-14 h-14 bg-white shadow-md text-[#00ADEF] rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:bg-[#00ADEF] group-hover:text-white transition-all duration-300">
+                                        <div className="w-14 h-14 bg-white shadow-md text-[#00ADEF] rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-[#00ADEF] group-hover:text-white transition-all duration-300">
                                             <Mail size={28} />
                                         </div>
                                         <div>
@@ -65,7 +65,7 @@ const Contact: React.FC = () => {
                                     </div>
 
                                     <div className="flex items-start gap-5 group">
-                                        <div className="w-14 h-14 bg-white shadow-md text-[#FFC600] rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:bg-[#FFC600] group-hover:text-white transition-all duration-300">
+                                        <div className="w-14 h-14 bg-white shadow-md text-[#FFC600] rounded-2xl flex items-center justify-center shrink-0 group-hover:bg-[#FFC600] group-hover:text-white transition-all duration-300">
                                             <Clock size={28} />
                                         </div>
                                         <div>

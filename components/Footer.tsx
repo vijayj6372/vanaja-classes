@@ -1,9 +1,9 @@
 import React from 'react';
 import { Facebook, Instagram, Twitter, Youtube, GraduationCap } from 'lucide-react';
+import Link from 'next/link';
 import Logo from './Logo';
 
 const Footer: React.FC = () => {
-    const whatsappUrl = "https://wa.me/917226004200";
     const youtubeLink = "https://m.youtube.com/watch?v=k_46Kynr-B0";
 
     return (
@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
                         <div className="bg-white p-4 rounded-2xl inline-block">
                             <Logo size="sm" />
                         </div>
-                        <p className="text-slate-400">
+                        <p className="text-slate-400 text-sm leading-relaxed">
                             Transforming potential into performance since 15 years. The most trusted name for science education in Bharuch.
                         </p>
                         <div className="flex space-x-4">
@@ -28,23 +28,23 @@ const Footer: React.FC = () => {
                     <div>
                         <h4 className="text-lg font-bold mb-6 border-b-2 border-[#FFC600] inline-block">Quick Links</h4>
                         <ul className="space-y-4 text-slate-400">
-                            <li><a href="#home" className="hover:text-white transition-colors font-medium">Home</a></li>
-                            <li><a href="#courses" className="hover:text-white transition-colors font-medium">Our Courses</a></li>
-                            <li><a href="#faculty" className="hover:text-white transition-colors font-medium">Expert Faculty</a></li>
-                            <li><a href="#scholarship" className="hover:text-white transition-colors font-medium">Scholarship Test</a></li>
-                            <li><a href="#gallery" className="hover:text-white transition-colors font-medium">Classroom Gallery</a></li>
-                            <li><a href="#contact" className="hover:text-white transition-colors font-medium">Admissions</a></li>
+                            <li><Link href="/" className="hover:text-white transition-colors font-medium">Home</Link></li>
+                            <li><Link href="/courses" className="hover:text-white transition-colors font-medium">Our Courses</Link></li>
+                            <li><Link href="/#faculty" className="hover:text-white transition-colors font-medium">Expert Faculty</Link></li>
+                            <li><Link href="/#scholarship" className="hover:text-white transition-colors font-medium">Scholarship Test</Link></li>
+                            <li><Link href="/#gallery" className="hover:text-white transition-colors font-medium">Classroom Gallery</Link></li>
+                            <li><Link href="/#contact" className="hover:text-white transition-colors font-medium">Admissions</Link></li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 className="text-lg font-bold mb-6 border-b-2 border-[#FFC600] inline-block">Our Programs</h4>
                         <ul className="space-y-4 text-slate-400">
-                            <li><a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors font-medium">IIT JEE Main & Adv</a></li>
-                            <li><a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors font-medium">NEET (Medical)</a></li>
-                            <li><a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors font-medium">GUJCET Exam</a></li>
-                            <li><a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors font-medium">Foundation Batches</a></li>
-                            <li><a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors font-medium">Board Excellence</a></li>
+                            <li><Link href="/courses" className="hover:text-white transition-colors font-medium">IIT JEE Main & Adv</Link></li>
+                            <li><Link href="/courses" className="hover:text-white transition-colors font-medium">NEET (Medical)</Link></li>
+                            <li><Link href="/courses" className="hover:text-white transition-colors font-medium">GUJCET Exam</Link></li>
+                            <li><Link href="/courses" className="hover:text-white transition-colors font-medium">Foundation Batches</Link></li>
+                            <li><Link href="/courses" className="hover:text-white transition-colors font-medium">Board Excellence</Link></li>
                         </ul>
                     </div>
 

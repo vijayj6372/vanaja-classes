@@ -8,7 +8,7 @@ export default function Faculty() {
 
     return (
         <section id="faculty" className="py-24 bg-white relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#004A99] to-transparent opacity-20"></div>
+            <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-[#004A99] to-transparent opacity-20"></div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-24">
@@ -31,7 +31,7 @@ export default function Faculty() {
                             </div>
 
                             {/* Card Container with Signature Thick Blue Border and Ultra Rounded Corners */}
-                            <div className="border-[14px] md:border-[18px] border-[#004A99] rounded-[4.5rem] md:rounded-[5.5rem] overflow-hidden bg-white shadow-2xl transition-all duration-300">
+                            <div className="border-8 sm:border-14 md:border-18 border-[#004A99] rounded-[4.5rem] md:rounded-[5.5rem] overflow-hidden bg-white shadow-2xl transition-all duration-300">
 
                                 {/* Photo Section (White background padding) */}
                                 <div className="p-4 md:p-6 bg-white">

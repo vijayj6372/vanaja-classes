@@ -22,7 +22,7 @@ const WhyChooseUs: React.FC = () => {
                         <div className="space-y-6">
                             {reasons.map((r, i) => (
                                 <div key={i} className="flex gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors">
-                                    <div className="flex-shrink-0 w-12 h-12 bg-white shadow-md rounded-lg flex items-center justify-center">
+                                    <div className="shrink-0 w-12 h-12 bg-white shadow-md rounded-lg flex items-center justify-center">
                                         {r.icon}
                                     </div>
                                     <div>

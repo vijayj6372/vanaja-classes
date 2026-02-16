@@ -10,9 +10,9 @@ import {
     ChevronRight,
     Zap
 } from 'lucide-react';
+import Link from 'next/link';
 import { COURSES } from './constants';
 
-// Mapping string names to actual Lucide components to ensure they exist at runtime
 const iconMap: Record<string, React.ElementType> = {
     BookOpen,
     GraduationCap,
@@ -23,8 +23,6 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 export default function Courses() {
-    const whatsappUrl = "https://wa.me/917226004200";
-
     return (
         <section id="courses" className="py-24 bg-slate-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,35 +39,29 @@ export default function Courses() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {COURSES.map((course, index) => {
+                    {COURSES.map((course: any, index: number) => {
                         const IconComponent = iconMap[course.icon];
                         return (
-                            <motion.div
-                                key={course.id}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                whileHover={{ y: -10 }}
-                                onClick={() => window.open(whatsappUrl, '_blank')}
-                                className="bg-white p-8 rounded-2xl shadow-md hover:shadow-2xl transition-all border-b-4 border-transparent hover:border-[#00529B] cursor-pointer group"
-                            >
-                                <div className="w-16 h-16 bg-[#00529B]/5 text-[#00529B] rounded-2xl flex items-center justify-center mb-6">
-                                    {IconComponent ? <IconComponent size={32} /> : <BookOpen size={32} />}
-                                </div>
-                                <h3 className="text-xl font-bold text-slate-800 mb-4">{course.title}</h3>
-                                <p className="text-slate-600 leading-relaxed mb-6">
-                                    {course.description}
-                                </p>
-                                <a
-                                    href={whatsappUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-[#00529B] font-bold flex items-center gap-2 hover:gap-4 transition-all group"
-                                    onClick={(e) => e.stopPropagation()}
+                            <Link href={course.href || '/courses'} key={course.id}>
+                                <motion.div
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                                    whileHover={{ y: -10 }}
+                                    className="bg-white p-8 rounded-2xl shadow-md hover:shadow-2xl transition-all border-b-4 border-transparent hover:border-[#00529B] cursor-pointer group h-full"
                                 >
-                                    Learn More <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                                </a>
-                            </motion.div>
+                                    <div className="w-16 h-16 bg-[#00529B]/5 text-[#00529B] rounded-2xl flex items-center justify-center mb-6">
+                                        {IconComponent ? <IconComponent size={32} /> : <BookOpen size={32} />}
+                                    </div>
+                                    <h3 className="text-xl font-bold text-slate-800 mb-4">{course.title}</h3>
+                                    <p className="text-slate-600 leading-relaxed mb-6">
+                                        {course.description}
+                                    </p>
+                                    <div className="text-[#00529B] font-bold flex items-center gap-2 group-hover:gap-4 transition-all">
+                                        Check Fees & Details <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                                    </div>
+                                </motion.div>
+                            </Link>
                         );
                     })}
                 </div>

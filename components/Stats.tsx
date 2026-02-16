@@ -16,7 +16,7 @@ const Stats: React.FC = () => {
             {/* Decorative Background Elements */}
             <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
                 <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[120%] bg-white rounded-full blur-[120px]"></div>
-                <div className="absolute bottom-[-20%] right-[-5%] w-[30%] h-[100%] bg-[#E31E24] rounded-full blur-[100px]"></div>
+                <div className="absolute bottom-[-20%] right-[-5%] w-[30%] h-full bg-[#E31E24] rounded-full blur-[100px]"></div>
             </div>
 
             <div className="max-w-7xl mx-auto px-4 relative z-10">

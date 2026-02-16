@@ -35,7 +35,7 @@ const BackToTop: React.FC = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.5 }}
                     onClick={scrollToTop}
-                    className="fixed bottom-28 right-8 z-[90] bg-[#004A99] text-white p-4 rounded-2xl shadow-2xl hover:bg-blue-900 transition-all border-2 border-white/20 group"
+                    className="fixed bottom-28 right-8 z-90 bg-[#004A99] text-white p-4 rounded-2xl shadow-2xl hover:bg-blue-900 transition-all border-2 border-white/20 group"
                     aria-label="Back to top"
                 >
                     <ChevronUp size={24} className="group-hover:-translate-y-1 transition-transform" />

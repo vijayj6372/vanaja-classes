@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 const WhatsAppFloating: React.FC = () => {
     return (
-        <div className="fixed bottom-8 right-8 z-[100] group flex items-center">
+        <div className="fixed bottom-8 right-8 z-100 group flex items-center">
             <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}

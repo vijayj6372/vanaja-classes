@@ -10,7 +10,7 @@ const ScholarshipBanner: React.FC = () => {
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#00529B] to-[#003d74] p-8 md:p-16 text-white shadow-2xl"
+                    className="relative rounded-3xl overflow-hidden bg-linear-to-r from-[#00529B] to-[#003d74] p-8 md:p-16 text-white shadow-2xl"
                 >
                     {/* Decorative Elements */}
                     <div className="absolute top-0 right-0 p-4 opacity-10">
@@ -37,7 +37,7 @@ const ScholarshipBanner: React.FC = () => {
                             </div>
                         </div>
 
-                        <div className="flex-shrink-0">
+                        <div className="shrink-0">
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
