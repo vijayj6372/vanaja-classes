@@ -1,10 +1,19 @@
+"use client";
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { Facebook, Instagram, Twitter, Youtube, GraduationCap } from 'lucide-react';
 import Link from 'next/link';
 import Logo from './Logo';
 
 const Footer: React.FC = () => {
     const youtubeLink = "https://m.youtube.com/watch?v=k_46Kynr-B0";
+    const router = useRouter();
+
+    const handleCourseClick = (e: React.MouseEvent) => {
+        e.preventDefault();
+        router.push('/courses');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     return (
         <footer className="bg-slate-900 text-white pt-20 pb-10">
@@ -40,11 +49,11 @@ const Footer: React.FC = () => {
                     <div>
                         <h4 className="text-lg font-bold mb-6 border-b-2 border-[#FFC600] inline-block">Our Programs</h4>
                         <ul className="space-y-4 text-slate-400">
-                            <li><Link href="/courses" className="hover:text-white transition-colors font-medium">IIT JEE Main & Adv</Link></li>
-                            <li><Link href="/courses" className="hover:text-white transition-colors font-medium">NEET (Medical)</Link></li>
-                            <li><Link href="/courses" className="hover:text-white transition-colors font-medium">GUJCET Exam</Link></li>
-                            <li><Link href="/courses" className="hover:text-white transition-colors font-medium">Foundation Batches</Link></li>
-                            <li><Link href="/courses" className="hover:text-white transition-colors font-medium">Board Excellence</Link></li>
+                            <li><Link href="/courses" onClick={handleCourseClick} className="hover:text-white transition-colors font-medium">IIT JEE Main & Adv</Link></li>
+                            <li><Link href="/courses" onClick={handleCourseClick} className="hover:text-white transition-colors font-medium">NEET (Medical)</Link></li>
+                            <li><Link href="/courses" onClick={handleCourseClick} className="hover:text-white transition-colors font-medium">GUJCET Exam</Link></li>
+                            <li><Link href="/courses" onClick={handleCourseClick} className="hover:text-white transition-colors font-medium">Foundation Batches</Link></li>
+                            <li><Link href="/courses" onClick={handleCourseClick} className="hover:text-white transition-colors font-medium">Board Excellence</Link></li>
                         </ul>
                     </div>
 
