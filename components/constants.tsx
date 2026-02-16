@@ -46,7 +46,16 @@ export const COURSES = [
   },
 ];
 
-export const FACULTY = [
+export interface FacultyMember {
+  id: number;
+  name: string;
+  subject: string;
+  qualification: string;
+  experience: string;
+  imageUrl: string;
+}
+
+export const FACULTY: FacultyMember[] = [
   {
     id: 1,
     name: 'BHAVIN PANCHAL',
@@ -73,7 +82,13 @@ export const FACULTY = [
   },
 ];
 
-export const YOUTUBE_VIDEOS = [
+export interface VideoItem {
+  id: string;
+  title: string;
+  description: string;
+}
+
+export const YOUTUBE_VIDEOS: VideoItem[] = [
   {
     id: 'k_46Kynr-B0',
     title: 'Success Story of our Topper',

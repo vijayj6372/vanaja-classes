@@ -38,13 +38,16 @@ const ScholarshipBanner: React.FC = () => {
                         </div>
 
                         <div className="shrink-0">
-                            <motion.button
+                            <motion.a
+                                href="https://wa.me/917226004200"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="bg-[#ED1C24] text-white px-12 py-5 rounded-2xl font-black text-xl shadow-2xl hover:bg-white hover:text-[#ED1C24] transition-all"
+                                className="bg-[#ED1C24] text-white px-12 py-5 rounded-2xl font-black text-xl shadow-2xl hover:bg-white hover:text-[#ED1C24] transition-all inline-block"
                             >
                                 REGISTER NOW
-                            </motion.button>
+                            </motion.a>
                         </div>
                     </div>
                 </motion.div>

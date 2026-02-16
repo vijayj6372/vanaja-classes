@@ -64,60 +64,60 @@ export default function CoursesPage() {
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-center mb-20"
+                        className="text-center mb-12 sm:mb-20"
                     >
-                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-[#004A99] mb-6 uppercase tracking-tighter">
-                            Course <span className="text-[#E31E24]">Pricing</span> & Details
+                        <h1 className="text-3xl sm:text-5xl md:text-7xl font-black text-[#004A99] mb-4 sm:mb-6 uppercase tracking-tighter leading-none">
+                            Course <span className="text-[#E31E24]">Pricing</span> <br className="sm:hidden" /> & Details
                         </h1>
-                        <p className="text-slate-500 text-sm sm:text-xl font-bold uppercase tracking-widest max-w-2xl mx-auto">
+                        <p className="text-slate-500 text-[10px] sm:text-xl font-bold uppercase tracking-widest max-w-2xl mx-auto px-4">
                             Transparent Coaching Fee Structure for 2025-26 Academic Year
                         </p>
                     </motion.div>
 
                     {/* Fees Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16 sm:mb-24">
                         {feeDetails.map((item, idx) => (
                             <motion.div
                                 key={idx}
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: idx * 0.1 }}
-                                className="bg-white rounded-[2.5rem] sm:rounded-[3rem] p-8 sm:p-10 shadow-2xl border-2 border-slate-50 relative overflow-hidden group hover:border-[#004A99]/20 transition-all"
+                                className="bg-white rounded-4xl sm:rounded-[3rem] p-6 sm:p-10 shadow-2xl border-2 border-slate-50 relative overflow-hidden group hover:border-[#004A99]/20 transition-all max-w-sm mx-auto w-full"
                             >
-                                <div className={`absolute top-0 right-0 w-32 h-32 ${item.color.split(' ')[0]} opacity-20 -mr-16 -mt-16 rounded-full group-hover:scale-150 transition-transform duration-500`}></div>
+                                <div className={`absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 ${item.color.split(' ')[0]} opacity-20 -mr-12 -mt-12 sm:-mr-16 sm:-mt-16 rounded-full group-hover:scale-150 transition-transform duration-500`}></div>
 
-                                <div className={`inline-block px-4 py-1 rounded-full ${item.color} text-[10px] font-black uppercase tracking-widest mb-6`}>
+                                <div className={`inline-block px-3 sm:px-4 py-1 rounded-full ${item.color} text-[8px] sm:text-[10px] font-black uppercase tracking-widest mb-4 sm:mb-6`}>
                                     {item.std.split(' ')[1] === 'Standard' ? 'Foundation' : 'Advanced'}
                                 </div>
 
-                                <h3 className="text-2xl sm:text-3xl font-black text-[#004A99] mb-2 uppercase">{item.std}</h3>
-                                <div className="flex items-baseline gap-1 mb-6">
-                                    <span className="text-3xl sm:text-4xl font-black text-[#E31E24]">₹{item.fee}</span>
-                                    <span className="text-slate-400 font-bold text-xs uppercase">INR</span>
+                                <h3 className="text-xl sm:text-3xl font-black text-[#004A99] mb-1 sm:mb-2 uppercase">{item.std}</h3>
+                                <div className="flex items-baseline gap-1 mb-4 sm:mb-6">
+                                    <span className="text-2xl sm:text-4xl font-black text-[#E31E24]">₹{item.fee}</span>
+                                    <span className="text-slate-400 font-bold text-[10px] sm:text-xs uppercase">INR</span>
                                 </div>
 
-                                <p className="text-slate-500 font-bold text-xs sm:text-sm leading-relaxed mb-8 min-h-12">
+                                <p className="text-slate-500 font-bold text-[10px] sm:text-sm leading-relaxed mb-6 sm:mb-8 min-h-8 sm:min-h-12">
                                     {item.period}
                                 </p>
 
-                                <div className="space-y-4">
-                                    <div className="flex items-center gap-3 text-slate-600 font-medium text-sm sm:text-base">
-                                        <CheckCircle2 size={18} className="text-green-500 shrink-0" />
+                                <div className="space-y-3 sm:space-y-4">
+                                    <div className="flex items-center gap-2 sm:gap-3 text-slate-600 font-medium text-xs sm:text-base">
+                                        <CheckCircle2 size={16} className="text-green-500 shrink-0 sm:w-[18px] sm:h-[18px]" />
                                         <span>Full Syllabus Coverage</span>
                                     </div>
-                                    <div className="flex items-center gap-3 text-slate-600 font-medium text-sm sm:text-base">
-                                        <CheckCircle2 size={18} className="text-green-500 shrink-0" />
+                                    <div className="flex items-center gap-2 sm:gap-3 text-slate-600 font-medium text-xs sm:text-base">
+                                        <CheckCircle2 size={16} className="text-green-500 shrink-0 sm:w-[18px] sm:h-[18px]" />
                                         <span>Expert Study Material</span>
                                     </div>
-                                    <div className="flex items-center gap-3 text-slate-600 font-medium text-sm sm:text-base">
-                                        <CheckCircle2 size={18} className="text-green-500 shrink-0" />
+                                    <div className="flex items-center gap-2 sm:gap-3 text-slate-600 font-medium text-xs sm:text-base">
+                                        <CheckCircle2 size={16} className="text-green-500 shrink-0 sm:w-[18px] sm:h-[18px]" />
                                         <span>Doubt Solving Sessions</span>
                                     </div>
                                 </div>
 
                                 <Link
                                     href="https://wa.me/917226004200"
-                                    className="mt-10 block w-full bg-[#004A99] text-white text-center py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-[#003d74] transition-colors shadow-lg shadow-blue-100"
+                                    className="mt-8 sm:mt-10 block w-full bg-[#004A99] text-white text-center py-3.5 sm:py-4 rounded-xl sm:rounded-2xl font-black uppercase tracking-widest hover:bg-[#003d74] transition-colors shadow-lg shadow-blue-100 text-xs sm:text-base"
                                 >
                                     Book Seat Now
                                 </Link>
@@ -126,18 +126,18 @@ export default function CoursesPage() {
                     </div>
 
                     {/* Features Section */}
-                    <div className="bg-slate-50 rounded-[3rem] sm:rounded-[4rem] p-8 sm:p-12 md:p-20 relative overflow-hidden">
-                        <div className="absolute top-0 right-0 p-10 opacity-5 rotate-12">
+                    <div className="bg-slate-50 rounded-[2.5rem] sm:rounded-[4rem] p-6 sm:p-12 md:p-20 relative overflow-hidden">
+                        <div className="absolute top-0 right-0 p-10 opacity-5 rotate-12 hidden sm:block">
                             <Zap size={200} />
                         </div>
 
-                        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 items-center">
-                            <div>
-                                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#004A99] mb-8 uppercase tracking-tighter leading-tight">
-                                    Why Choose <br />
+                        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 items-center">
+                            <div className="text-center lg:text-left">
+                                <h2 className="text-2xl sm:text-4xl md:text-5xl font-black text-[#004A99] mb-6 sm:mb-8 uppercase tracking-tighter leading-tight">
+                                    Why Choose <br className="hidden sm:block" />
                                     <span className="text-[#E31E24]">Vanaja Classes?</span>
                                 </h2>
-                                <p className="text-slate-600 text-base sm:text-lg font-medium leading-relaxed mb-10">
+                                <p className="text-slate-600 text-sm sm:text-lg font-medium leading-relaxed mb-8 sm:mb-10 max-w-xl mx-auto lg:mx-0">
                                     Our infrastructure and personalized approach make us the most trusted name in Bharuch for JEE, NEET, and Board preparations.
                                 </p>
                                 <div className="flex flex-wrap gap-3 sm:gap-4">

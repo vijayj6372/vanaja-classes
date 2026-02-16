@@ -20,7 +20,7 @@ const Stats: React.FC = () => {
             </div>
 
             <div className="max-w-7xl mx-auto px-4 relative z-10">
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-12">
                     {stats.map((stat, index) => (
                         <motion.div
                             key={index}
@@ -29,13 +29,13 @@ const Stats: React.FC = () => {
                             transition={{ delay: index * 0.1 }}
                             className="text-center group"
                         >
-                            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 mb-6 group-hover:bg-white/20 transition-all border border-white/20">
-                                <stat.icon size={32} style={{ color: stat.color }} />
+                            <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-white/10 mb-4 sm:mb-6 group-hover:bg-white/20 transition-all border border-white/20">
+                                <stat.icon size={stat.icon === Users ? 24 : 32} className="w-6 h-6 sm:w-8 sm:h-8" style={{ color: stat.color }} />
                             </div>
-                            <h3 className="text-4xl md:text-5xl font-black text-white mb-2 tracking-tighter">
+                            <h3 className="text-2xl sm:text-4xl md:text-5xl font-black text-white mb-1 sm:mb-2 tracking-tighter">
                                 {stat.value}
                             </h3>
-                            <p className="text-blue-100 text-xs md:text-sm font-black uppercase tracking-widest">
+                            <p className="text-blue-100 text-[8px] sm:text-xs md:text-sm font-black uppercase tracking-widest leading-tight">
                                 {stat.label}
                             </p>
                         </motion.div>
