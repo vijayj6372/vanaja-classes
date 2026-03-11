@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { FACULTY, FacultyMember } from './constants';
 
 export default function Faculty() {
@@ -36,17 +37,14 @@ export default function Faculty() {
                                 {/* Photo Section (White background padding) */}
                                 <div className="p-3 sm:p-4 md:p-6 bg-white">
                                     <div className="rounded-[2.5rem] sm:rounded-[3rem] md:rounded-[4rem] overflow-hidden bg-slate-50 flex justify-center items-center h-[300px] sm:h-[380px] md:h-[480px] w-full relative">
-                                        <img
+                                        <Image
                                             src={teacher.imageUrl}
                                             alt={teacher.name}
-                                            className="absolute inset-0 w-full h-full object-cover"
+                                            fill
+                                            quality={80}
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+                                            className="object-cover"
                                             style={{ objectPosition: 'center 10%' }}
-                                            loading="lazy"
-                                            onError={(e) => {
-                                                const target = e.target as HTMLImageElement;
-                                                target.src = fallbackImage;
-                                                target.onerror = null;
-                                            }}
                                         />
                                     </div>
                                 </div>

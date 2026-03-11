@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import ImageSlider from "@/components/ImageSlider";
 import Stats from "@/components/Stats";
 import Courses from "@/components/Courses";
 import WhyChooseUs from "@/components/WhyChooseUs";
@@ -16,6 +17,7 @@ export default function Home() {
     <div className="min-h-screen relative selection:bg-[#FFC600] selection:text-[#004A99]">
       <Navbar />
       <Hero />
+      <ImageSlider />
       <Stats />
       <Courses />
       <WhyChooseUs />

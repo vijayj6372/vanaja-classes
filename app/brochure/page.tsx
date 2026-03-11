@@ -6,9 +6,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const brochureImages = [
-    { src: '/b1.png', alt: 'Vanaja Classes Brochure Page 1' },
+    { src: '/b1.jpg', alt: 'Vanaja Classes Brochure Page 1' },
     { src: '/b2.png', alt: 'Vanaja Classes Brochure Page 2' },
-    { src: '/b3.png', alt: 'Vanaja Classes Brochure Page 3' },
+    { src: '/b3.jpg', alt: 'Vanaja Classes Brochure Page 3' },
     { src: '/b4.png', alt: 'Vanaja Classes Brochure Page 4' },
 ];
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { CheckCircle, Heart, PenTool, BarChart, Zap } from 'lucide-react';
 
 const WhyChooseUs: React.FC = () => {
@@ -36,11 +37,38 @@ const WhyChooseUs: React.FC = () => {
 
                     <div className="grid grid-cols-2 gap-4 sm:gap-6 relative mt-8 lg:mt-0">
                         <div className="space-y-4 sm:space-y-6 pt-8 sm:pt-12">
-                            <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=400" className="rounded-2xl sm:rounded-3xl shadow-xl w-full h-48 sm:h-64 object-cover" alt="Student 1" />
-                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=400" className="rounded-2xl sm:rounded-3xl shadow-xl w-full h-48 sm:h-64 object-cover" alt="Student 2" />
+                            <div className="relative rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden h-48 sm:h-64">
+                                <Image
+                                    src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&q=80&w=400"
+                                    fill
+                                    quality={75}
+                                    sizes="(max-width: 768px) 50vw, 200px"
+                                    className="object-cover"
+                                    alt="Student studying with dedication"
+                                />
+                            </div>
+                            <div className="relative rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden h-48 sm:h-64">
+                                <Image
+                                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=400"
+                                    fill
+                                    quality={75}
+                                    sizes="(max-width: 768px) 50vw, 200px"
+                                    className="object-cover"
+                                    alt="Group of students collaborating"
+                                />
+                            </div>
                         </div>
                         <div className="space-y-4 sm:space-y-6">
-                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=400" className="rounded-2xl sm:rounded-3xl shadow-xl w-full h-64 sm:h-80 object-cover" alt="Classroom" />
+                            <div className="relative rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden h-64 sm:h-80">
+                                <Image
+                                    src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=400"
+                                    fill
+                                    quality={75}
+                                    sizes="(max-width: 768px) 50vw, 200px"
+                                    className="object-cover"
+                                    alt="Modern classroom environment"
+                                />
+                            </div>
                             <div className="bg-[#FFD100] p-6 sm:p-8 rounded-2xl sm:rounded-3xl shadow-xl text-[#00529B]">
                                 <p className="text-3xl sm:text-5xl font-black mb-1 sm:mb-2">100%</p>
                                 <p className="font-bold text-sm sm:text-lg leading-tight uppercase">Result Guaranteed Approach</p>
