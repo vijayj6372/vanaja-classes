@@ -1,13 +1,12 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Users, Award, BookOpen, Clock } from 'lucide-react';
+import { Users, Award, Clock } from 'lucide-react';
 
 const stats = [
     { label: 'Successful Students', value: '5000+', icon: Users, color: '#FFC600' },
     { label: 'JEE/NEET Qualifiers', value: '850+', icon: Award, color: '#E31E24' },
     { label: 'Years of Excellence', value: '15+', icon: Clock, color: '#00ADEF' },
-    { label: 'Expert Faculty Members', value: '12+', icon: BookOpen, color: '#FFFFFF' },
 ];
 
 const Stats: React.FC = () => {

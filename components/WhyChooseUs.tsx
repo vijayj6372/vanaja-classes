@@ -1,11 +1,10 @@
 import React from 'react';
 import Image from 'next/image';
-import { CheckCircle, Heart, PenTool, BarChart, Zap } from 'lucide-react';
+import { CheckCircle, Heart, BarChart, Zap } from 'lucide-react';
 
 const WhyChooseUs: React.FC = () => {
     const reasons = [
         { title: 'Personal Care Teaching', icon: <Heart className="text-[#ED1C24]" />, desc: 'Individual attention to every student regardless of their current level.' },
-        { title: 'Experienced Faculty', icon: <PenTool className="text-[#00529B]" />, desc: 'Subject matter experts with years of teaching experience.' },
         { title: 'Regular Tests', icon: <CheckCircle className="text-green-500" />, desc: 'Weekly topic-wise tests and full-length mock examinations.' },
         { title: 'Performance Tracking', icon: <BarChart className="text-[#FFD100]" />, desc: 'Detailed analytics and feedback shared with parents regularly.' },
         { title: 'Result-Focused Approach', icon: <Zap className="text-[#00529B]" />, desc: 'Strategy designed to maximize scores in both Boards and Entrance Exams.' },

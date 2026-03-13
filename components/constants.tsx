@@ -1,7 +1,6 @@
 export const NAV_ITEMS = [
   { label: 'Home', href: '/' },
   { label: 'Courses', href: '/courses' },
-  { label: 'Faculty', href: '/#faculty' },
   { label: 'Scholarship', href: '/#scholarship' },
   { label: 'Gallery', href: '/#gallery' },
   { label: 'Brochure', href: '/brochure' },
@@ -46,41 +45,7 @@ export const COURSES = [
   },
 ];
 
-export interface FacultyMember {
-  id: number;
-  name: string;
-  subject: string;
-  qualification: string;
-  experience: string;
-  imageUrl: string;
-}
 
-export const FACULTY: FacultyMember[] = [
-  {
-    id: 1,
-    name: 'BHAVIN PANCHAL',
-    subject: 'PHYSICS & MATHS',
-    qualification: 'B.TECH',
-    experience: '7+ YEARS EXP.',
-    imageUrl: '/bhavin panchal.png',
-  },
-  {
-    id: 2,
-    name: 'VANAJA MADAM',
-    subject: 'CHEMISTRY',
-    qualification: 'M.SC.',
-    experience: '15+ YEARS EXP.',
-    imageUrl: '/vanaja madam.png',
-  },
-  {
-    id: 3,
-    name: 'BHAVIN PATEL',
-    subject: 'BIOLOGY',
-    qualification: 'M.SC., B.ED.',
-    experience: '7+ YEARS EXP.',
-    imageUrl: '/bhavin patel.png',
-  },
-];
 
 export interface VideoItem {
   id: string;

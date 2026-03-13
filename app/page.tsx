@@ -7,7 +7,7 @@ import Courses from "@/components/Courses";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import ScholarshipBanner from "@/components/ScholarshipBanner";
 import VideoGallery from "@/components/VideoGallery";
-import Faculty from "@/components/Faculty";
+
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import WhatsAppFloating from "@/components/WhatsAppFloating";
@@ -24,7 +24,6 @@ export default function Home() {
       <ScholarshipBanner />
       {/* Integrated Video Gallery for Classroom Insights */}
       <VideoGallery />
-      <Faculty />
 
       {/* Result Section Title */}
       <section className="py-20 bg-slate-100 border-y border-slate-200">
