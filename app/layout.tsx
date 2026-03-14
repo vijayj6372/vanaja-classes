@@ -34,6 +34,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="preload"
+          href="/VANAJA_COACHING_CLASSES_-_Intro_1080P.mp4"
+          as="video"
+          type="video/mp4"
+          fetchPriority="high"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

@@ -129,88 +129,108 @@ export default function Hero() {
 }
 
 function VideoPlayer() {
-    const [isMuted, setIsMuted] = useState(false);
+    const [isMuted, setIsMuted] = useState(true);
     const [isPlaying, setIsPlaying] = useState(true);
     const [progress, setProgress] = useState(0);
     const [duration, setDuration] = useState(0);
     const [volume, setVolume] = useState(0.9);
     const [isFullscreen, setIsFullscreen] = useState(false);
-    const [videoSrc, setVideoSrc] = useState<string | null>(null);
-
+    
+    // Direct link to public folder file
+    const videoSrc = "/VANAJA_COACHING_CLASSES_-_Intro_1080P.mp4";
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const containerRef = useRef<HTMLDivElement | null>(null);
 
+    // Audio Unlock Engine & Autoplay Force
     useEffect(() => {
-        // Delay video loading to prioritize landing page LCP
-        const timer = setTimeout(() => {
-            setVideoSrc("/VANAJA_COACHING_CLASSES_-_Intro_1080P.mp4");
-        }, 1000);
-
-        return () => clearTimeout(timer);
-    }, []);
-
-    useEffect(() => {
-        if (!videoSrc) return;
         const v = videoRef.current;
         if (!v) return;
-        // set initial volume
-        try { v.volume = volume; } catch { }
-        v.muted = false;
 
-        const tryPlay = async () => {
+        // Force browser to treat this as a high-priority media
+        v.preload = "auto";
+        v.volume = volume;
+
+        const forcePlay = async () => {
             try {
+                // Try playing immediately (often works on desktop if user interacted with previous page)
+                v.muted = false;
                 await v.play();
-                setIsPlaying(true);
                 setIsMuted(false);
-            } catch (e) {
-                // autoplay with sound blocked -> fallback to muted autoplay
+                setIsPlaying(true);
+            } catch (err) {
+                // FALLBACK: Start Muted (required by mobile and some desktop browsers)
                 v.muted = true;
                 setIsMuted(true);
-                try { await v.play(); setIsPlaying(true); } catch { }
+                try {
+                    await v.play();
+                    setIsPlaying(true);
+                } catch (e) {
+                    setIsPlaying(false);
+                }
+
+                // MASTER AUDIO UNLOCKER: Unmute on first possible user movement
+                const unlock = async () => {
+                    if (v.muted || v.paused) {
+                        try {
+                            v.muted = false;
+                            setIsMuted(false);
+                            if (v.paused) await v.play();
+                        } catch (e) { }
+                    }
+                    removeListeners();
+                };
+
+                const removeListeners = () => {
+                    ['click', 'touchstart', 'scroll', 'mousedown', 'keydown'].forEach(evt => 
+                        window.removeEventListener(evt, unlock)
+                    );
+                };
+
+                ['click', 'touchstart', 'scroll', 'mousedown', 'keydown'].forEach(evt => 
+                    window.addEventListener(evt, unlock, { passive: true, once: true })
+                );
             }
         };
 
-        tryPlay();
+        forcePlay();
+    }, []);
 
-        const onTime = () => {
-            if (!v || !v.duration) return;
-            setProgress((v.currentTime / v.duration) * 100);
-        };
+    // Sync state with DOM events
+    useEffect(() => {
+        const v = videoRef.current;
+        if (!v) return;
 
-        const onLoaded = () => {
-            if (!v) return;
-            setDuration(v.duration || 0);
-        };
+        const onTimeUpdate = () => setProgress((v.currentTime / v.duration) * 100);
+        const onLoaded = () => setDuration(v.duration);
+        const onPlay = () => setIsPlaying(true);
+        const onPause = () => setIsPlaying(false);
 
-        v.addEventListener('timeupdate', onTime);
+        v.addEventListener('timeupdate', onTimeUpdate);
         v.addEventListener('loadedmetadata', onLoaded);
+        v.addEventListener('play', onPlay);
+        v.addEventListener('pause', onPause);
+
         return () => {
-            v.removeEventListener('timeupdate', onTime);
+            v.removeEventListener('timeupdate', onTimeUpdate);
             v.removeEventListener('loadedmetadata', onLoaded);
+            v.removeEventListener('play', onPlay);
+            v.removeEventListener('pause', onPause);
         };
     }, []);
 
     const togglePlay = () => {
         const v = videoRef.current;
         if (!v) return;
-        if (v.paused) {
-            v.play().catch(() => { });
-            setIsPlaying(true);
-        } else {
-            v.pause();
-            setIsPlaying(false);
-        }
+        if (v.paused) v.play().catch(() => {});
+        else v.pause();
     };
 
     const toggleMute = () => {
         const v = videoRef.current;
         if (!v) return;
-        const newMuted = !isMuted;
-        setIsMuted(newMuted);
-        v.muted = newMuted;
-        if (!newMuted) {
-            v.play().catch(() => { });
-        }
+        v.muted = !v.muted;
+        setIsMuted(v.muted);
+        if (v.volume === 0) v.volume = 0.9;
     };
 
     const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -220,31 +240,30 @@ function VideoPlayer() {
         const rect = bar.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const pct = Math.max(0, Math.min(1, x / rect.width));
-        v.currentTime = pct * (v.duration || 0);
+        v.currentTime = pct * v.duration;
         setProgress(pct * 100);
     };
 
     const handleVolume = (val: number) => {
         const v = videoRef.current;
         if (!v) return;
-        const newVol = Math.max(0, Math.min(1, val));
-        setVolume(newVol);
-        v.volume = newVol;
-        if (newVol > 0) {
-            setIsMuted(false);
+        v.volume = val;
+        setVolume(val);
+        if (val > 0) {
             v.muted = false;
+            setIsMuted(false);
+        } else {
+            v.muted = true;
+            setIsMuted(true);
         }
     };
 
     const toggleFullscreen = () => {
         const el = containerRef.current;
         if (!el) return;
-        // @ts-ignore
         if (!document.fullscreenElement) {
-            // @ts-ignore
             el.requestFullscreen().then(() => setIsFullscreen(true)).catch(() => { });
         } else {
-            // @ts-ignore
             document.exitFullscreen().then(() => setIsFullscreen(false)).catch(() => { });
         }
     };
@@ -257,55 +276,67 @@ function VideoPlayer() {
     };
 
     return (
-        <div ref={containerRef} className="w-full h-full relative bg-black">
+        <div ref={containerRef} className="w-full h-full relative bg-black group/player overflow-hidden">
+            {/* RAW HTML VIDEO - Browser-Native Instant Playback */}
             <video
                 ref={videoRef}
-                className="w-full h-full object-cover"
-                loop
-                playsInline
-                autoPlay
-                muted={isMuted}
-                preload={videoSrc ? "auto" : "none"}
-                poster="https://images.unsplash.com/photo-1523050853063-bd80e290ce72?auto=format&fit=crop&q=80&w=1600"
-                src={videoSrc ?? undefined}
+                className="w-full h-full object-cover pointer-events-none"
+                loop playsInline autoPlay muted={isMuted} preload="auto"
+                src={videoSrc}
             />
 
-            {/* Big center play/pause overlay for UX */}
+            {/* Play/Pause Center Indicator */}
             {!isPlaying && (
                 <button
                     onClick={togglePlay}
-                    aria-label="Play"
-                    className="absolute inset-0 m-auto w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/95 flex items-center justify-center shadow-2xl z-30"
+                    className="absolute inset-0 m-auto w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/95 flex items-center justify-center shadow-2xl z-30 transform hover:scale-110 transition-transform"
                 >
-                    <Play size={24} />
+                    <Play size={24} className="ml-1" fill="currentColor" />
                 </button>
             )}
 
-            {/* Controls bar */}
-            <div className="absolute left-0 right-0 bottom-0 z-40 p-3 sm:p-4 bg-linear-to-t from-black/60 to-transparent">
-                <div className="max-w-full mx-auto flex items-center gap-3">
-                    <button onClick={togglePlay} aria-label={isPlaying ? 'Pause' : 'Play'} className="p-2 sm:p-3 bg-white/95 rounded-full shadow-md">
-                        {isPlaying ? <Pause size={16} /> : <Play size={16} />}
-                    </button>
+            {/* Muted Indicator (Show only if muted and playing) */}
+            {isMuted && isPlaying && (
+                <div className="absolute top-4 right-4 z-40 bg-black/60 backdrop-blur-md text-white px-3 py-1.5 rounded-lg border border-white/20 flex items-center gap-2 animate-bounce">
+                    <VolumeX size={14} className="text-[#FFC600]" />
+                    <span className="text-[10px] font-black uppercase tracking-widest whitespace-nowrap">Click for Sound</span>
+                </div>
+            )}
 
-                    <div className="flex-1">
-                        <div onClick={handleSeek} className="h-2 w-full bg-white/20 rounded cursor-pointer relative">
-                            <div className="absolute left-0 top-0 h-2 bg-[#E31E24] rounded" style={{ width: `${progress}%` }} />
-                        </div>
-                        <div className="flex items-center justify-between text-xs text-white/90 mt-1">
-                            <div>{formatTime((progress / 100) * duration)}</div>
-                            <div>{formatTime(duration)}</div>
-                        </div>
+            {/* Premium Controls - Show on Hover */}
+            <div className="absolute left-0 right-0 bottom-0 z-40 p-4 sm:p-6 bg-linear-to-t from-black/80 via-black/30 to-transparent transition-opacity duration-300 opacity-0 group-hover/player:opacity-100">
+                <div className="max-w-full mx-auto flex flex-col gap-3">
+                    {/* Progress Slider */}
+                    <div onClick={handleSeek} className="h-1.5 w-full bg-white/20 rounded-full cursor-pointer relative group/bar">
+                        <div className="absolute left-0 top-0 h-1.5 bg-[#E31E24] rounded-full" style={{ width: `${progress}%` }} />
+                        <div className="absolute top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow-lg opacity-0 group-hover/bar:opacity-100 transition-opacity" style={{ left: `calc(${progress}% - 6px)` }} />
                     </div>
 
-                    <div className="flex items-center gap-2 ml-3">
-                        <button onClick={toggleMute} className="p-2 sm:p-3 bg-white/95 rounded-full shadow-md" aria-label={isMuted ? 'Unmute' : 'Mute'}>
-                            {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-                        </button>
-                        <input aria-label="Volume" type="range" min={0} max={1} step={0.01} value={volume} onChange={(e) => handleVolume(Number(e.target.value))} className="w-20 sm:w-28" />
-                        <button onClick={toggleFullscreen} className="p-2 sm:p-3 bg-white/95 rounded-full shadow-md" aria-label="Fullscreen">
-                            <Maximize2 size={16} />
-                        </button>
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-4">
+                            <button onClick={togglePlay} className="text-white hover:text-[#00ADEF] transition-colors">
+                                {isPlaying ? <Pause size={20} fill="currentColor" /> : <Play size={20} fill="currentColor" />}
+                            </button>
+                            <span className="text-xs font-mono text-white/90">
+                                {formatTime((progress/100) * duration)} / {formatTime(duration)}
+                            </span>
+                        </div>
+
+                        <div className="flex items-center gap-4">
+                            <div className="flex items-center gap-2 group/vol">
+                                <button onClick={toggleMute} className="text-white">
+                                    {isMuted ? <VolumeX size={18} className="text-[#E31E24]" /> : <Volume2 size={18} />}
+                                </button>
+                                <input 
+                                    type="range" min="0" max="1" step="0.01" value={volume} 
+                                    onChange={(e) => handleVolume(Number(e.target.value))} 
+                                    className="w-20 sm:w-28 accent-[#E31E24]" 
+                                />
+                            </div>
+                            <button onClick={toggleFullscreen} className="text-white hover:scale-110 transition-transform">
+                                <Maximize2 size={18} />
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
