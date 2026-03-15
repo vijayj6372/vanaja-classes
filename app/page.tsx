@@ -5,6 +5,7 @@ import ImageSlider from "@/components/ImageSlider";
 import Stats from "@/components/Stats";
 import Courses from "@/components/Courses";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import AcademicExcellenceVideo from "@/components/AcademicExcellenceVideo";
 import ScholarshipBanner from "@/components/ScholarshipBanner";
 import VideoGallery from "@/components/VideoGallery";
 
@@ -20,6 +21,7 @@ export default function Home() {
       <ImageSlider />
       <Stats />
       <Courses />
+      <AcademicExcellenceVideo />
       <WhyChooseUs />
       <ScholarshipBanner />
       {/* Integrated Video Gallery for Classroom Insights */}

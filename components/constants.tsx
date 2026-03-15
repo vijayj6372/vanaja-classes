@@ -2,6 +2,7 @@ export const NAV_ITEMS = [
   { label: 'Home', href: '/' },
   { label: 'Courses', href: '/courses' },
   { label: 'Scholarship', href: '/#scholarship' },
+  { label: 'Testimonials', href: '/#testimonials' },
   { label: 'Gallery', href: '/#gallery' },
   { label: 'Brochure', href: '/brochure' },
   { label: 'Contact', href: '/#contact' },
