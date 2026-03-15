@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 export default function Hero() {
     return (
-        <section id="home" className="relative min-h-screen flex items-center pt-16 md:pt-20 pb-20 overflow-hidden bg-white">
+        <section id="home" className="relative min-h-[110vh] flex flex-col pt-48 md:pt-64 pb-20 overflow-hidden bg-white">
             {/* Dynamic Background Graphics */}
             <div className="absolute top-0 right-0 w-1/3 h-full bg-linear-to-l from-[#004A99]/5 to-transparent rounded-l-[200px] hidden lg:block"></div>
             <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#00ADEF]/10 rounded-full blur-[100px]"></div>
@@ -135,13 +135,14 @@ function VideoPlayer() {
     const [duration, setDuration] = useState(0);
     const [volume, setVolume] = useState(0.9);
     const [isFullscreen, setIsFullscreen] = useState(false);
-    const [showControls, setShowControls] = useState(true);
+    const [showControls, setShowControls] = useState(false);
     const controlsTimerRef = useRef<NodeJS.Timeout | null>(null);
     
     // Direct link to public folder file
     const videoSrc = "/VANAJA_COACHING_CLASSES_-_Intro_1080P.mp4";
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const containerRef = useRef<HTMLDivElement | null>(null);
+    const isFirstPlay = useRef(true);
 
     const resetControlsTimer = () => {
         if (controlsTimerRef.current) clearTimeout(controlsTimerRef.current);
@@ -151,76 +152,71 @@ function VideoPlayer() {
         }, 3000);
     };
 
-    // Audio Unlock Engine & Autoplay Force + Intersection Observer
+    // ULTRA-AGGRESSIVE "AUTOPLAY WITH SOUND" ENGINE
     useEffect(() => {
         const v = videoRef.current;
         if (!v) return;
 
+        // Force initial parameters at DOM level for absolute reliability
+        v.muted = true;
         v.preload = "auto";
-        v.volume = volume;
-
-        const attemptPlayWithSound = async () => {
+        
+        const startAutoplay = async () => {
             try {
-                // Try unmuted first
-                v.muted = false;
+                // Try initial play (usually works muted)
                 await v.play();
-                setIsMuted(false);
                 setIsPlaying(true);
             } catch (err) {
-                // Fallback to muted
-                v.muted = true;
-                setIsMuted(true);
-                await v.play().catch(() => {});
-                setIsPlaying(true);
+                // Persistent retry if blocked
+                const retryPlay = () => v.play().then(() => setIsPlaying(true)).catch(() => {});
+                window.addEventListener('mousemove', retryPlay, { once: true });
+                window.addEventListener('touchstart', retryPlay, { once: true });
             }
         };
 
-        // Initial immediate attempt for the hero intro
-        attemptPlayWithSound();
+        // Delay tiny bit to ensure DOM is ready
+        setTimeout(startAutoplay, 50);
 
-        // Handle scroll-into-view autoplay/pause with sound focus
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // When in view, try to play with sound
-                    attemptPlayWithSound();
-                } else {
-                    // When out of view (e.g. scrolled down to testimonials), pause AND mute
-                    v.pause();
-                    v.muted = true;
-                    setIsMuted(true);
-                }
-            });
-        }, { threshold: 0.1 }); // Low threshold for hero so it starts IMMEDIATELY on page open
-
-        observer.observe(v);
-
-        // MASTER AUDIO UNLOCKER
-        const unlock = async () => {
+        // MASTER SOUND UNLOCKER - Transitions to 100% volume on first user breath
+        const unlockAudio = async () => {
             if (v && v.muted) {
                 try {
                     v.muted = false;
+                    v.volume = 1.0;
                     setIsMuted(false);
+                    // Force playback refresh
                     if (v.paused) v.play().catch(() => {});
                 } catch (e) { }
             }
-            ['click', 'touchstart', 'scroll', 'mousedown', 'keydown'].forEach(evt => 
-                window.removeEventListener(evt, unlock)
+            // Once we have any signal, we stop listening
+            ['click', 'touchstart', 'scroll', 'mousedown', 'keydown', 'mousemove', 'wheel'].forEach(evt => 
+                window.removeEventListener(evt, unlockAudio)
             );
         };
 
-        ['click', 'touchstart', 'scroll', 'mousedown', 'keydown'].forEach(evt => 
-            window.addEventListener(evt, unlock, { passive: true })
+        // Listen for ANY signal that a human is at the computer
+        ['click', 'touchstart', 'scroll', 'mousedown', 'keydown', 'mousemove', 'wheel'].forEach(evt => 
+            window.addEventListener(evt, unlockAudio, { passive: true })
         );
+
+        // Visibility observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) v.play().catch(() => {});
+                else v.pause();
+            });
+        }, { threshold: 0.1 });
+
+        observer.observe(v);
 
         return () => {
             observer.disconnect();
             if (controlsTimerRef.current) clearTimeout(controlsTimerRef.current);
-            ['click', 'touchstart', 'scroll', 'mousedown', 'keydown'].forEach(evt => 
-                window.removeEventListener(evt, unlock)
+            ['click', 'touchstart', 'scroll', 'mousedown', 'keydown', 'mousemove', 'wheel'].forEach(evt => 
+                window.removeEventListener(evt, unlockAudio)
             );
         };
-    }, []);
+    }, [volume]);
 
     // Sync state with DOM events
     useEffect(() => {
@@ -231,7 +227,10 @@ function VideoPlayer() {
         const onLoaded = () => setDuration(v.duration);
         const onPlay = () => {
             setIsPlaying(true);
-            resetControlsTimer();
+            if (!isFirstPlay.current) {
+                resetControlsTimer();
+            }
+            isFirstPlay.current = false;
         };
         const onPause = () => {
             setIsPlaying(false);
@@ -319,18 +318,23 @@ function VideoPlayer() {
             onMouseMove={resetControlsTimer}
             onTouchStart={resetControlsTimer}
         >
-            {/* RAW HTML VIDEO - Browser-Native Instant Playback */}
+            {/* SOURCE-LEVEL AUTOPLAY - The only way to bypass mobile restrictions */}
             <video
                 ref={videoRef}
                 className="w-full h-full object-cover cursor-pointer"
-                loop playsInline autoPlay muted={isMuted} preload="auto"
-                src={videoSrc}
+                loop 
+                playsInline 
+                autoPlay 
+                muted // Hardcoded muted attribute for guaranteed immediate start
+                preload="auto"
                 onClick={() => {
                     if (showControls) togglePlay();
                     else setShowControls(true);
                 }}
                 onContextMenu={(e) => e.preventDefault()}
-            />
+            >
+                <source src={videoSrc} type="video/mp4" />
+            </video>
 
             {/* Play/Pause Center Indicator (Visible when paused or on tap) */}
             {(!isPlaying || showControls) && (
@@ -354,10 +358,11 @@ function VideoPlayer() {
                         e.stopPropagation();
                         toggleMute();
                     }}
-                    className="absolute top-4 right-4 z-50 bg-[#E31E24] text-white px-4 py-2 rounded-xl border border-white/20 flex items-center gap-2 animate-bounce hover:scale-105 transition-transform shadow-2xl"
+                    className="absolute top-4 right-4 z-50 bg-[#E31E24] text-white px-5 py-2.5 rounded-2xl border-2 border-white/40 flex items-center gap-3 animate-pulse hover:scale-105 transition-transform shadow-2xl"
                 >
-                    <VolumeX size={18} fill="currentColor" />
-                    <span className="text-xs font-black uppercase tracking-widest whitespace-nowrap">Tap for Sound</span>
+                    <div className="w-2 h-2 bg-white rounded-full animate-ping"></div>
+                    <Volume2 size={20} fill="currentColor" />
+                    <span className="text-xs font-black uppercase tracking-widest whitespace-nowrap">Enable Sound</span>
                 </button>
             )}
 
