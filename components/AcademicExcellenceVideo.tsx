@@ -5,7 +5,7 @@ import { Play, Pause, Volume2, VolumeX, Maximize2 } from 'lucide-react';
 
 export default function AcademicExcellenceVideo() {
     return (
-        <section id="testimonials" className="py-24 bg-white overflow-hidden">
+        <section id="testimonials" className="pt-24 pb-12 bg-white overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <motion.div 
                     initial={{ opacity: 0, y: 40 }}

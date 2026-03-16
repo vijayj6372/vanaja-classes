@@ -17,11 +17,13 @@ export default function Home() {
   return (
     <div className="min-h-screen relative selection:bg-[#FFC600] selection:text-[#004A99]">
       <Navbar />
+      <div className="pt-20 sm:pt-24">
+        <ImageSlider />
+      </div>
       <Hero />
-      <ImageSlider />
       <Stats />
-      <Courses />
       <AcademicExcellenceVideo />
+      <Courses />
       <WhyChooseUs />
       <ScholarshipBanner />
       {/* Integrated Video Gallery for Classroom Insights */}

@@ -26,7 +26,7 @@ const ImageSlider = () => {
     }, [paginate]);
 
     return (
-        <div className="relative w-full h-[350px] xs:h-[450px] sm:h-[600px] md:h-[700px] lg:h-[800px] xl:h-[900px] overflow-hidden group shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] mb-12 bg-slate-900 border-4 sm:border-12 border-white rounded-4xl sm:rounded-[4rem]">
+        <div className="relative w-full h-[250px] xs:h-[320px] sm:h-[420px] md:h-[480px] lg:h-[550px] xl:h-[600px] overflow-hidden group shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] mb-8 bg-slate-900 border-4 sm:border-8 border-white rounded-3xl sm:rounded-[3rem]">
             <AnimatePresence initial={false} custom={direction}>
                 <motion.div
                     key={currentIndex}
@@ -50,7 +50,7 @@ const ImageSlider = () => {
                             paginate(-1);
                         }
                     }}
-                    className="absolute inset-0 cursor-grab active:cursor-grabbing p-4 sm:p-8 md:p-12"
+                    className="absolute inset-0 cursor-grab active:cursor-grabbing p-2 sm:p-4 md:p-6"
                 >
                     <Image
                         src={images[currentIndex].src}
