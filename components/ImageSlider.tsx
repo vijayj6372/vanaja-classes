@@ -6,9 +6,10 @@ import Image from 'next/image';
 const images = [
     { src: '/i1.png', alt: 'Vanaja Classes Slider 1' },
     { src: '/i2.png', alt: 'Vanaja Classes Slider 2' },
-    { src: '/i3.jpg', alt: 'Vanaja Classes Slider 3' },
+    { src: '/i3.png', alt: 'Vanaja Classes Slider 3' },
     { src: '/i4.jpg', alt: 'Vanaja Classes Slider 4' },
     { src: '/i5.png', alt: 'Vanaja Classes Slider 5' },
+    { src: '/priyesha.png', alt: 'Vanaja Classes Slider 6' },
 ];
 
 const ImageSlider = () => {
