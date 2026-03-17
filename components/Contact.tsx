@@ -15,7 +15,7 @@ const Contact: React.FC = () => {
                     >
                         Visit Our <span className="text-[#E31E24]">Campus</span>
                     </motion.h2>
-                    <p className="text-slate-500 font-bold uppercase tracking-widest text-sm">Find us in the heart of Bharuch</p>
+                    <p className="text-slate-500 font-bold uppercase tracking-widest text-sm">Best Tuition Classes in Bharuch - 8th to 12th CBSE/GSEB</p>
                     <div className="w-24 h-2 bg-[#FFC600] mx-auto mt-6 rounded-full"></div>
                 </div>
 

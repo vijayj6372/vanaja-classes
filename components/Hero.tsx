@@ -30,13 +30,13 @@ export default function Hero() {
                             Vanaja <br />
                             <span className="text-[#E31E24]">Classes</span>
                             <span className="block text-lg sm:text-2xl md:text-3xl lg:text-4xl mt-4 text-slate-500 font-bold tracking-widest lg:tracking-[0.15em] border-l-4 lg:border-l-8 border-[#FFC600] pl-4 lg:pl-6 mx-auto lg:mx-0 w-fit">
-                                BHARUCH, GUJARAT
+                                PERSONAL CARE COACHING
                             </span>
                         </h1>
 
                         {/* Key Programs Focus */}
                         <div className="mb-8 mt-8 sm:mt-10">
-                            <p className="text-[10px] sm:text-xs font-black text-slate-400 uppercase tracking-[0.3em] lg:tracking-[0.4em] mb-4">Leading Institute for:</p>
+                            <p className="text-[10px] sm:text-xs font-black text-slate-400 uppercase tracking-[0.3em] lg:tracking-[0.4em] mb-4">Best Coaching in Bharuch for:</p>
                             <div className="flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start">
                                 <div className="bg-[#004A99] text-white px-3 sm:px-5 py-1.5 sm:py-2 rounded-lg sm:rounded-xl flex items-center gap-1.5 sm:gap-2 shadow-lg border border-white/10 transform hover:scale-105 transition-transform cursor-default">
                                     <Target size={14} className="text-[#FFC600]" />
@@ -52,14 +52,14 @@ export default function Hero() {
                                 </div>
                                 <div className="bg-slate-800 text-white px-3 sm:px-5 py-1.5 sm:py-2 rounded-lg sm:rounded-xl flex items-center gap-1.5 sm:gap-2 shadow-lg border border-white/10 transform hover:scale-105 transition-transform cursor-default">
                                     <BookOpen size={14} className="text-[#FFC600]" />
-                                    <span className="font-black text-xs sm:text-base lg:text-lg uppercase tracking-tight">11-12 SCI</span>
+                                    <span className="font-black text-xs sm:text-base lg:text-lg uppercase tracking-tight">8th - 12th</span>
                                 </div>
                             </div>
                         </div>
 
                         <div className="flex items-center justify-center lg:justify-start gap-4 mb-6 sm:mb-8">
                             <p className="text-base sm:text-xl lg:text-2xl font-bold text-slate-700 uppercase tracking-tight leading-tight">
-                                Personal Care for Every Student
+                                Best Personal Attention Tuition in Bharuch
                             </p>
                         </div>
 

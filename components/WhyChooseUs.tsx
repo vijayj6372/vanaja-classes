@@ -4,20 +4,20 @@ import { CheckCircle, Heart, BarChart, Zap } from 'lucide-react';
 
 const WhyChooseUs: React.FC = () => {
     const reasons = [
-        { title: 'Personal Care Teaching', icon: <Heart className="text-[#ED1C24]" />, desc: 'Individual attention to every student regardless of their current level.' },
-        { title: 'Regular Tests', icon: <CheckCircle className="text-green-500" />, desc: 'Weekly topic-wise tests and full-length mock examinations.' },
-        { title: 'Performance Tracking', icon: <BarChart className="text-[#FFD100]" />, desc: 'Detailed analytics and feedback shared with parents regularly.' },
-        { title: 'Result-Focused Approach', icon: <Zap className="text-[#00529B]" />, desc: 'Strategy designed to maximize scores in both Boards and Entrance Exams.' },
+        { title: 'Small Batch Coaching', icon: <Heart className="text-[#ED1C24]" />, desc: 'Personal attention with small batches to ensure doubt solving for every student.' },
+        { title: 'Regular Board Prep', icon: <CheckCircle className="text-green-500" />, desc: 'Weekly topic-wise tests and full-length mock examinations for CBSE & GSEB.' },
+        { title: 'Personal Performance Tracking', icon: <BarChart className="text-[#FFD100]" />, desc: 'Detailed analytics and feedback shared with parents regularly to ensure growth.' },
+        { title: 'Result-Focused Approach', icon: <Zap className="text-[#00529B]" />, desc: 'Strategy designed to maximize scores in both Boards and Entrance Exams like JEE/NEET.' },
     ];
 
     return (
-        <section className="py-24 bg-white">
+        <section className="py-24 bg-white font-sans">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                     <div className="text-center lg:text-left">
-                        <h2 className="text-3xl sm:text-4xl font-extrabold text-[#00529B] mb-6">Why Vanaja Classes?</h2>
+                        <h2 className="text-3xl sm:text-4xl font-extrabold text-[#00529B] mb-6 uppercase tracking-tight">Best Coaching Classes in Bharuch</h2>
                         <p className="text-slate-600 text-base sm:text-lg mb-8 lg:mb-10 max-w-xl mx-auto lg:mx-0">
-                            We don't just teach subjects; we mentor students to achieve their highest potential through a meticulously planned academic calendar and personal attention.
+                            Vanaja Personal Care Coaching Classes offers expert guidance for 8th to 12th standard students with a focus on personal attention and academic excellence.
                         </p>
                         <div className="space-y-4 sm:space-y-6 text-left">
                             {reasons.map((r, i) => (
