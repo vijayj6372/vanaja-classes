@@ -80,8 +80,8 @@ const ImageSlider = () => {
                 </motion.div>
             </AnimatePresence>
 
-            {/* Navigation Dots - Premium Design with Glassmorphism background */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-4 z-20 bg-white/10 backdrop-blur-md px-6 py-3 rounded-full border border-white/20">
+            {/* Navigation Dots - Ultra Compact Design */}
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-20 bg-black/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 shadow-lg">
                 {images.map((_, index) => (
                     <button
                         key={index}
@@ -90,16 +90,16 @@ const ImageSlider = () => {
                             setDirection(index > currentIndex ? 1 : -1);
                             setCurrentIndex(index);
                         }}
-                        className="relative h-4 group/dot"
+                        className="relative h-1 group/dot"
                         aria-label={`Slide ${index + 1}`}
                         title={`Go to slide ${index + 1}`}
                     >
                         <div className={`transition-all duration-500 rounded-full ${currentIndex === index
-                            ? 'w-16 bg-[#FFC600] ring-6 ring-yellow-400/30'
-                            : 'w-4 bg-white/70 group-hover/dot:bg-white group-hover/dot:scale-125'
-                            } h-full shadow-2xl`} />
+                            ? 'w-6 sm:w-10 bg-[#FFC600] ring-2 ring-yellow-400/20'
+                            : 'w-1 bg-white/50 group-hover/dot:bg-white group-hover/dot:scale-110'
+                            } h-full shadow-inner`} />
                         {currentIndex === index && (
-                            <div className="absolute inset-0 blur-xl bg-yellow-400 opacity-60 animate-pulse"></div>
+                            <div className="absolute inset-0 blur-md bg-yellow-400 opacity-30 animate-pulse"></div>
                         )}
                     </button>
                 ))}
