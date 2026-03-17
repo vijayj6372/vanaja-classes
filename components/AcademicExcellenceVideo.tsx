@@ -47,13 +47,14 @@ function VideoPlayer({ src }: { src: string }) {
     
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const containerRef = useRef<HTMLDivElement | null>(null);
+    const isPlayingRef = useRef(false);
 
     const resetControlsTimer = () => {
         if (controlsTimerRef.current) clearTimeout(controlsTimerRef.current);
         setShowControls(true);
         controlsTimerRef.current = setTimeout(() => {
-            if (isPlaying) setShowControls(false);
-        }, 3000);
+            setShowControls(false);
+        }, 2000);
     };
 
     // Audio Unlocker & Intersection Observer logic
@@ -132,11 +133,13 @@ function VideoPlayer({ src }: { src: string }) {
         const onLoaded = () => setDuration(v.duration);
         const onPlay = () => {
             setIsPlaying(true);
+            isPlayingRef.current = true;
             resetControlsTimer();
         };
         const onPause = () => {
             setIsPlaying(false);
-            setShowControls(true);
+            isPlayingRef.current = false;
+            resetControlsTimer();
         };
 
         v.addEventListener('timeupdate', onTimeUpdate);
@@ -212,13 +215,13 @@ function VideoPlayer({ src }: { src: string }) {
                 src={src}
                 onClick={() => {
                     if (showControls) togglePlay();
-                    else setShowControls(true);
+                    else resetControlsTimer();
                 }}
                 onContextMenu={(e) => e.preventDefault()}
             />
 
             {/* Muted Indicator (Show only if muted and playing) */}
-            {isMuted && isPlaying && (
+            {isMuted && isPlaying && showControls && (
                 <button
                     onClick={(e) => {
                         e.stopPropagation();
@@ -231,8 +234,8 @@ function VideoPlayer({ src }: { src: string }) {
                 </button>
             )}
 
-            {/* Play Button Overlay - Visible when paused or on tap */}
-            {(!isPlaying || showControls) && (
+            {/* Play Button Overlay - Visible when on tap */}
+            {showControls && (
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
                     <motion.button
                         initial={{ opacity: 0, scale: 0.5 }}
