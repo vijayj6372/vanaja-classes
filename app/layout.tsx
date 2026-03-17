@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s | Vanaja Coaching Classes"
   },
   description:
-    "Vanaja Personal Care Coaching Classes in Bharuch offers expert coaching for 8th to 12th std CBSE & GSEB students with personal attention, small batches, and board exam preparation.",
+    "Vanaja Personal Care Coaching Classes in Bharuch offers expert coaching for 8th to 12th std CBSE & GSEB students. Best tuition classes in Bharuch for IIT JEE, NEET, GUJCET, Science, and Commerce board exams with personal attention.",
 
   keywords: [
     "vanaja personal care coaching classes",
@@ -65,34 +65,100 @@ export const metadata: Metadata = {
     "tuition near zadeshwar road bharuch"
   ],
 
-  authors: [{ name: "Vanaja Coaching Classes" }],
+  authors: [{ name: "Vanaja Coaching Classes", url: "https://www.vanajacoachingclasses.in" }],
   creator: "Vanaja Coaching Classes",
+  publisher: "Vanaja Coaching Classes",
 
   openGraph: {
     title: "Best Coaching Classes in Bharuch | Vanaja Personal Care",
-    description:
-      "Top coaching classes in Bharuch for CBSE & GSEB students from 8th to 12th std. Small batches & personal attention.",
+    description: "Top coaching classes in Bharuch for CBSE & GSEB students from 8th to 12th std. Best coaching for IIT JEE, NEET, Science & Commerce. Small batches & personal attention.",
     url: "https://www.vanajacoachingclasses.in",
     siteName: "Vanaja Coaching Classes",
     locale: "en_IN",
     type: "website",
+    images: [
+      {
+        url: '/b1.png', // Using an existing high-quality image from public/
+        width: 1200,
+        height: 630,
+        alt: 'Vanaja Personal Care Coaching Classes Bharuch',
+      },
+    ],
   },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Vanaja Personal Care Coaching Classes Bharuch",
+    description: "Expert coaching for 8th to 12th std CBSE & GSEB students. IIT JEE, NEET, Science & Commerce classes. Small batches & personal attention.",
+    images: ["/b1.png"],
+  },
+
+  alternates: {
+    canonical: "https://www.vanajacoachingclasses.in",
+  },
+
+  category: "Education",
 
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   icons: {
-    icon: '/favicon.png',
+    icon: [
+      { url: '/favicon.png', type: 'image/png' },
+      { url: '/favicon.ico', sizes: 'any' }
+    ],
+    shortcut: '/favicon.png',
+    apple: [
+      { url: '/favicon.png', sizes: '180x180', type: 'image/png' }
+    ],
+    other: [
+      { rel: 'apple-touch-icon-precomposed', url: '/favicon.png' },
+    ],
   },
   verification: {
     google: "googlee740e957d1cce24f",
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "Vanaja Personal Care Coaching Classes",
+  "alternateName": ["Vanaja Coaching Classes Bharuch", "Vanaja Classes Bharuch"],
+  "url": "https://www.vanajacoachingclasses.in",
+  "logo": "https://www.vanajacoachingclasses.in/favicon.png",
+  "image": "https://www.vanajacoachingclasses.in/b1.png",
+  "description": "Leading coaching classes in Bharuch offering expert education for 8th to 12th Std CBSE & GSEB students. Best personal care tuition in Bharuch for IIT JEE, NEET, GUJCET, Science and Commerce.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Add. 11, 12, 13, 2nd Floor, Zadeshwar Road",
+    "addressLocality": "Bharuch",
+    "addressRegion": "Gujarat",
+    "postalCode": "392012",
+    "addressCountry": "IN"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+91-72260-04200",
+    "contactType": "customer service"
+  },
+  "sameAs": [
+    // Add social media links here if they exist
+  ]
+};
+
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
+  themeColor: '#ffffff',
 };
 
 export default function RootLayout({
@@ -109,6 +175,10 @@ export default function RootLayout({
           as="video"
           type="video/mp4"
           fetchPriority="high"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body

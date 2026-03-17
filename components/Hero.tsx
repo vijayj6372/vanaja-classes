@@ -29,6 +29,7 @@ export default function Hero() {
                         <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-[#004A99] leading-none lg:leading-[0.9] mb-4 uppercase tracking-tighter">
                             Vanaja <br />
                             <span className="text-[#E31E24]">Classes</span>
+                            <span className="block text-sm sm:text-base md:text-lg text-slate-400 mt-2 tracking-[0.2em] font-black">Bharuch&apos;s Premier Institute</span>
                             <span className="block text-lg sm:text-2xl md:text-3xl lg:text-4xl mt-4 text-slate-500 font-bold tracking-widest lg:tracking-[0.15em] border-l-4 lg:border-l-8 border-[#FFC600] pl-4 lg:pl-6 mx-auto lg:mx-0 w-fit">
                                 PERSONAL CARE COACHING
                             </span>
@@ -57,14 +58,17 @@ export default function Hero() {
                             </div>
                         </div>
 
-                        <div className="flex items-center justify-center lg:justify-start gap-4 mb-6 sm:mb-8">
-                            <p className="text-base sm:text-xl lg:text-2xl font-bold text-slate-700 uppercase tracking-tight leading-tight">
+                        <div className="flex flex-col gap-2 mb-6 sm:mb-8 text-center lg:text-left">
+                            <h2 className="text-base sm:text-xl lg:text-2xl font-bold text-slate-800 uppercase tracking-tight leading-tight">
                                 Best Personal Attention Tuition in Bharuch
-                            </p>
+                            </h2>
+                            <h3 className="text-sm sm:text-base text-slate-600 font-semibold max-w-lg mx-auto lg:mx-0">
+                                Top CBSE & GSEB coaching in Bharuch for 8th to 12th Std. Premier coaching institute for Science, Commerce, IIT JEE, NEET & GUJCET board exam preparation.
+                            </h3>
                         </div>
 
-                        <p className="text-sm sm:text-base lg:text-lg text-slate-500 max-w-lg mb-8 sm:mb-10 leading-relaxed font-medium italic mx-auto lg:mx-0">
-                            "We believe that every student has the potential to excel. Our personalized teaching methods ensure no one is left behind in the competitive race."
+                        <p className="text-sm sm:text-base lg:text-lg text-slate-500 max-w-lg mb-8 sm:mb-10 leading-relaxed font-medium italic mx-auto lg:mx-0 shadow-sm p-4 bg-white/50 rounded-xl border border-blue-50">
+                            "Get the best home tuition-like small batch coaching in Bharuch. We offer personal coaching classes with doubt solving, ensuring every student prepares perfectly for board exams near Zadeshwar Road."
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
