@@ -212,6 +212,7 @@ function VideoPlayer({ src }: { src: string }) {
                 ref={videoRef}
                 className="w-full h-full object-cover cursor-pointer"
                 loop playsInline muted={isMuted} preload="metadata"
+                poster="/priyesha.png"
                 src={src}
                 onClick={() => {
                     if (showControls) togglePlay();

@@ -331,6 +331,7 @@ function VideoPlayer() {
                 autoPlay 
                 muted // Hardcoded muted attribute for guaranteed immediate start
                 preload="auto"
+                poster="/b1.png"
                 onClick={() => {
                     if (showControls) togglePlay();
                     else setShowControls(true);

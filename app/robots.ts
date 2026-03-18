@@ -4,7 +4,8 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: '*',
-      allow: '/',
+      allow: ['/', '/about', '/courses', '/contact', '/results', '/gallery'],
+      disallow: ['/private/', '/api/'],
     },
     sitemap: 'https://www.vanajacoachingclasses.in/sitemap.xml',
   }
