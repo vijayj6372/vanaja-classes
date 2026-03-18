@@ -187,17 +187,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [
-      { url: '/favicon.png', type: 'image/png' },
-      { url: '/favicon.ico', sizes: 'any' }
-    ],
-    shortcut: '/favicon.png',
-    apple: [
-      { url: '/favicon.png', sizes: '180x180', type: 'image/png' }
-    ],
-    other: [
-      { rel: 'apple-touch-icon-precomposed', url: '/favicon.png' },
-    ],
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
   },
   verification: {
     google: "googlee740e957d1cce24f",
@@ -210,7 +202,7 @@ const jsonLd = {
   "name": "Vanaja Personal Care Coaching Classes",
   "alternateName": ["Vanaja Coaching Classes Bharuch", "Vanaja Classes Bharuch"],
   "url": "https://www.vanajacoachingclasses.in",
-  "logo": "https://www.vanajacoachingclasses.in/favicon.png",
+  "logo": "https://www.vanajacoachingclasses.in/favicon.ico",
   "image": "https://www.vanajacoachingclasses.in/b1.png",
   "description": "Leading coaching classes in Bharuch offering expert education for 8th to 12th Std CBSE & GSEB students. Best personal care tuition in Bharuch for IIT JEE, NEET, GUJCET, Science and Commerce.",
   "address": {
