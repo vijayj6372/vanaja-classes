@@ -34,7 +34,7 @@ const Logo: React.FC<LogoProps> = ({ className = '', size = 'md' }) => {
         <div className={`flex items-center ${container} ${className}`}>
             {/* Recreating the Owl Mascot with Graduation Cap */}
             <div className={`relative ${icon} shrink-0`}>
-                <svg viewBox="0 0 100 120" className="w-full h-full">
+                <svg viewBox="0 0 100 120" className="w-full h-full" role="img" aria-label="Vanaja Coaching Classes Logo">
                     {/* Owl Body */}
                     <path d="M50 20 C25 20 15 45 15 75 C15 105 30 115 50 115 C70 115 85 105 85 75 C85 45 75 20 50 20Z" fill="#004A99" />
                     <path d="M50 35 C35 35 25 50 25 75 C25 95 35 105 50 105 C65 105 75 95 75 75 C75 50 65 35 50 35Z" fill="#00ADEF" />

@@ -211,7 +211,7 @@ function VideoPlayer({ src }: { src: string }) {
             <video
                 ref={videoRef}
                 className="w-full h-full object-cover cursor-pointer"
-                loop playsInline muted={isMuted} preload="metadata"
+                loop playsInline muted={isMuted} preload="none"
                 poster="/priyesha.png"
                 src={src}
                 onClick={() => {
@@ -224,6 +224,7 @@ function VideoPlayer({ src }: { src: string }) {
             {/* Muted Indicator (Show only if muted and playing) */}
             {isMuted && isPlaying && showControls && (
                 <button
+                    aria-label="Tap to unmute sound"
                     onClick={(e) => {
                         e.stopPropagation();
                         toggleMute();
@@ -239,6 +240,7 @@ function VideoPlayer({ src }: { src: string }) {
             {showControls && (
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
                     <motion.button
+                        aria-label={isPlaying ? "Pause video" : "Play video"}
                         initial={{ opacity: 0, scale: 0.5 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.5 }}
@@ -261,7 +263,7 @@ function VideoPlayer({ src }: { src: string }) {
 
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4 sm:gap-6">
-                            <button onClick={(e) => togglePlay(e as any)} className="text-white hover:text-[#FFC600] transition-colors p-1">
+                            <button aria-label={isPlaying ? "Pause video" : "Play video"} onClick={(e) => togglePlay(e as any)} className="text-white hover:text-[#FFC600] transition-colors p-1">
                                 {isPlaying ? <Pause size={30} fill="currentColor" /> : <Play size={30} fill="currentColor" />}
                             </button>
                             <span className="text-sm sm:text-base font-black font-mono text-white tracking-tighter">
@@ -270,10 +272,10 @@ function VideoPlayer({ src }: { src: string }) {
                         </div>
 
                         <div className="flex items-center gap-4 sm:gap-6">
-                            <button onClick={(e) => { e.stopPropagation(); toggleMute(); }} className="text-white hover:text-[#FFC600] transition-colors p-1">
+                            <button aria-label={isMuted ? "Unmute sound" : "Mute sound"} onClick={(e) => { e.stopPropagation(); toggleMute(); }} className="text-white hover:text-[#FFC600] transition-colors p-1">
                                 {isMuted ? <VolumeX size={30} className="text-[#E31E24]" /> : <Volume2 size={30} />}
                             </button>
-                            <button onClick={(e) => { e.stopPropagation(); toggleFullscreen(); }} className="text-white hover:text-[#FFC600] transition-colors p-1">
+                            <button aria-label="Toggle full screen" onClick={(e) => { e.stopPropagation(); toggleFullscreen(); }} className="text-white hover:text-[#FFC600] transition-colors p-1">
                                 <Maximize2 size={30} />
                             </button>
                         </div>

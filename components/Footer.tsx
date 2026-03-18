@@ -27,10 +27,10 @@ const Footer: React.FC = () => {
                             Transforming potential into performance since 15 years. The most trusted name for science education in Bharuch.
                         </p>
                         <div className="flex space-x-4">
-                            <a href="#" className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-[#004A99] transition-colors"><Facebook size={20} /></a>
-                            <a href="#" className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-[#E31E24] transition-colors"><Instagram size={20} /></a>
-                            <a href="#" className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-400 transition-colors"><Twitter size={20} /></a>
-                            <a href={youtubeLink} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-[#E31E24] transition-colors"><Youtube size={20} /></a>
+                            <a href="#" aria-label="Facebook Profile" className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-[#004A99] transition-colors"><Facebook size={20} /></a>
+                            <a href="#" aria-label="Instagram Profile" className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-[#E31E24] transition-colors"><Instagram size={20} /></a>
+                            <a href="#" aria-label="Twitter Profile" className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-blue-400 transition-colors"><Twitter size={20} /></a>
+                            <a href={youtubeLink} aria-label="YouTube Channel" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center hover:bg-[#E31E24] transition-colors"><Youtube size={20} /></a>
                         </div>
                     </div>
 

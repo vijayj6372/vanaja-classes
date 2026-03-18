@@ -3,6 +3,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const WhatsAppFloating: React.FC = () => {
+    const [mounted, setMounted] = React.useState(false);
+
+    React.useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) return null;
+
     return (
         <div className="fixed bottom-8 right-8 z-100 group flex items-center">
             <motion.div

@@ -53,30 +53,20 @@ const ImageSlider = () => {
                     }}
                     className="absolute inset-0 cursor-grab active:cursor-grabbing"
                 >
-                    {/* Dynamic Blurred Background to eliminate black bars */}
-                    <div className="absolute inset-0 overflow-hidden">
-                        <Image
-                            src={images[currentIndex].src}
-                            alt=""
-                            fill
-                            className="object-cover blur-[60px] opacity-40 scale-125"
-                            aria-hidden="true"
-                        />
-                    </div>
-
+                    {/* Replaced dynamic blurred background image with CSS filter on the main image if needed or a solid color container */}
                     <Image
                         src={images[currentIndex].src}
                         alt={images[currentIndex].alt}
                         fill
-                        quality={90}
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, (max-width: 1536px) 80vw, 1600px"
+                        quality={75}
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 75vw, 1200px"
                         className="object-contain transition-transform duration-700 relative z-10"
                         priority={currentIndex === 0}
                     />
 
                     {/* Refined Premium Overlays - Removed heavy black gradients */}
-                    <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent z-15 pointer-events-none"></div>
-                    <div className="absolute inset-0 bg-linear-to-r from-black/10 via-transparent to-black/10 z-15 pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-linear-to-t from-black/30 via-transparent to-transparent z-15 pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-linear-to-r from-black/5 via-transparent to-black/5 z-15 pointer-events-none"></div>
                 </motion.div>
             </AnimatePresence>
 

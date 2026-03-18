@@ -1,18 +1,21 @@
 import React from 'react';
 import { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ImageSlider from "@/components/ImageSlider";
-import Stats from "@/components/Stats";
-import Courses from "@/components/Courses";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import AcademicExcellenceVideo from "@/components/AcademicExcellenceVideo";
-import ScholarshipBanner from "@/components/ScholarshipBanner";
-import VideoGallery from "@/components/VideoGallery";
 
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
-import WhatsAppFloating from "@/components/WhatsAppFloating";
+// Lazily load components that are below the fold to improve LCP/Performance score
+const Stats = dynamic(() => import("@/components/Stats"));
+const Courses = dynamic(() => import("@/components/Courses"));
+const WhyChooseUs = dynamic(() => import("@/components/WhyChooseUs"));
+const AcademicExcellenceVideo = dynamic(() => import("@/components/AcademicExcellenceVideo"));
+const ScholarshipBanner = dynamic(() => import("@/components/ScholarshipBanner"));
+const VideoGallery = dynamic(() => import("@/components/VideoGallery"));
+
+const Contact = dynamic(() => import("@/components/Contact"));
+const Footer = dynamic(() => import("@/components/Footer"));
+const WhatsAppFloating = dynamic(() => import("@/components/WhatsAppFloating"));
 
 export const metadata: Metadata = {
   title: 'Vanaja Coaching Classes Bharuch | Best Tuition & Coaching',

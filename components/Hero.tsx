@@ -193,13 +193,13 @@ function VideoPlayer() {
                 } catch (e) { }
             }
             // Once we have any signal, we stop listening
-            ['click', 'touchstart', 'scroll', 'mousedown', 'keydown', 'mousemove', 'wheel'].forEach(evt => 
+            ['click', 'touchstart', 'scroll', 'mousedown', 'keydown'].forEach(evt => 
                 window.removeEventListener(evt, unlockAudio)
             );
         };
 
         // Listen for ANY signal that a human is at the computer
-        ['click', 'touchstart', 'scroll', 'mousedown', 'keydown', 'mousemove', 'wheel'].forEach(evt => 
+        ['click', 'touchstart', 'scroll', 'mousedown', 'keydown'].forEach(evt => 
             window.addEventListener(evt, unlockAudio, { passive: true })
         );
 
@@ -216,7 +216,7 @@ function VideoPlayer() {
         return () => {
             observer.disconnect();
             if (controlsTimerRef.current) clearTimeout(controlsTimerRef.current);
-            ['click', 'touchstart', 'scroll', 'mousedown', 'keydown', 'mousemove', 'wheel'].forEach(evt => 
+            ['click', 'touchstart', 'scroll', 'mousedown', 'keydown'].forEach(evt => 
                 window.removeEventListener(evt, unlockAudio)
             );
         };
@@ -330,7 +330,7 @@ function VideoPlayer() {
                 playsInline 
                 autoPlay 
                 muted // Hardcoded muted attribute for guaranteed immediate start
-                preload="auto"
+                preload="metadata"
                 poster="/b1.png"
                 onClick={() => {
                     if (showControls) togglePlay();
@@ -345,6 +345,7 @@ function VideoPlayer() {
             {(!isPlaying || showControls) && (
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
                     <motion.button
+                        aria-label={isPlaying ? "Pause video" : "Play video"}
                         initial={{ opacity: 0, scale: 0.5 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.5 }}
@@ -359,6 +360,7 @@ function VideoPlayer() {
             {/* Tap for Sound Pulsing Indicator */}
             {isMuted && isPlaying && (
                 <button
+                    aria-label="Tap to unmute sound"
                     onClick={(e) => {
                         e.stopPropagation();
                         toggleMute();
@@ -382,7 +384,7 @@ function VideoPlayer() {
 
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4 sm:gap-6">
-                            <button onClick={(e) => togglePlay(e as any)} className="text-white hover:text-[#00ADEF] transition-colors p-1">
+                            <button aria-label={isPlaying ? "Pause video" : "Play video"} onClick={(e) => togglePlay(e as any)} className="text-white hover:text-[#00ADEF] transition-colors p-1">
                                 {isPlaying ? <Pause size={24} fill="currentColor" /> : <Play size={24} fill="currentColor" />}
                             </button>
                             <span className="text-sm font-black font-mono text-white tracking-tighter">
@@ -392,19 +394,20 @@ function VideoPlayer() {
 
                         <div className="flex items-center gap-4 sm:gap-6">
                             <div className="hidden sm:flex items-center gap-3 group/vol">
-                                <button onClick={(e) => toggleMute(e as any)} className="text-white hover:text-[#00ADEF] transition-colors">
+                                <button aria-label={isMuted ? "Unmute sound" : "Mute sound"} onClick={(e) => toggleMute(e as any)} className="text-white hover:text-[#00ADEF] transition-colors">
                                     {isMuted ? <VolumeX size={20} className="text-[#E31E24]" /> : <Volume2 size={20} />}
                                 </button>
                                 <input 
                                     type="range" min="0" max="1" step="0.01" value={volume} 
+                                    aria-label="Volume control"
                                     onChange={(e) => handleVolume(Number(e.target.value))} 
                                     className="w-20 accent-[#E31E24] h-1 rounded-full appearance-none bg-white/20 cursor-pointer" 
                                 />
                             </div>
-                            <button onClick={(e) => { e.stopPropagation(); toggleMute(); }} className="sm:hidden text-white">
+                            <button aria-label={isMuted ? "Unmute sound" : "Mute sound"} onClick={(e) => { e.stopPropagation(); toggleMute(); }} className="sm:hidden text-white">
                                 {isMuted ? <VolumeX size={24} className="text-[#E31E24]" /> : <Volume2 size={24} />}
                             </button>
-                            <button onClick={(e) => { e.stopPropagation(); toggleFullscreen(); }} className="text-white hover:scale-110 transition-transform p-1">
+                            <button aria-label="Toggle full screen" onClick={(e) => { e.stopPropagation(); toggleFullscreen(); }} className="text-white hover:scale-110 transition-transform p-1">
                                 <Maximize2 size={22} />
                             </button>
                         </div>
