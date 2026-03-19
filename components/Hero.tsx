@@ -152,8 +152,8 @@ function VideoPlayer() {
         if (controlsTimerRef.current) clearTimeout(controlsTimerRef.current);
         setShowControls(true);
         controlsTimerRef.current = setTimeout(() => {
-            if (isPlaying) setShowControls(false);
-        }, 3000);
+            setShowControls(false);
+        }, 2000);
     };
 
     // ULTRA-AGGRESSIVE "AUTOPLAY WITH SOUND" ENGINE
@@ -320,7 +320,11 @@ function VideoPlayer() {
             ref={containerRef} 
             className="w-full h-full relative bg-black group/player overflow-hidden"
             onMouseMove={resetControlsTimer}
+            onMouseEnter={resetControlsTimer}
             onTouchStart={resetControlsTimer}
+            onTouchMove={resetControlsTimer}
+            onMouseDown={resetControlsTimer}
+            onKeyDown={resetControlsTimer}
         >
             {/* SOURCE-LEVEL AUTOPLAY - The only way to bypass mobile restrictions */}
             <video
@@ -333,7 +337,7 @@ function VideoPlayer() {
                 preload="metadata"
                 onClick={() => {
                     if (showControls) togglePlay();
-                    else setShowControls(true);
+                    else resetControlsTimer();
                 }}
                 onContextMenu={(e) => e.preventDefault()}
             >
@@ -341,7 +345,7 @@ function VideoPlayer() {
             </video>
 
             {/* Play/Pause Center Indicator (Visible when paused or on tap) */}
-            {(!isPlaying || showControls) && (
+            {showControls && (
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
                     <motion.button
                         aria-label={isPlaying ? "Pause video" : "Play video"}
@@ -357,7 +361,7 @@ function VideoPlayer() {
             )}
 
             {/* Tap for Sound Pulsing Indicator */}
-            {isMuted && isPlaying && (
+            {isMuted && isPlaying && showControls && (
                 <button
                     aria-label="Tap to unmute sound"
                     onClick={(e) => {

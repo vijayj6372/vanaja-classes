@@ -206,7 +206,11 @@ function VideoPlayer({ src }: { src: string }) {
             ref={containerRef} 
             className="w-full h-full relative group/player"
             onMouseMove={resetControlsTimer}
+            onMouseEnter={resetControlsTimer}
             onTouchStart={resetControlsTimer}
+            onTouchMove={resetControlsTimer}
+            onMouseDown={resetControlsTimer}
+            onKeyDown={resetControlsTimer}
         >
             <video
                 ref={videoRef}
