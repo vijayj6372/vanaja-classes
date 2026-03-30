@@ -1,0 +1,527 @@
+1️⃣ PROJECT OVERVIEW
+Project Name
+
+Vanaja Coaching Student Portal
+
+Website
+
+https://www.vanajacoachingclasses.in
+
+Coaching Type
+
+Academic Coaching for:
+
+Standard 8–12
+CBSE
+GSEB
+IIT-JEE
+NEET
+Objective 🎯
+
+Build a student learning platform integrated into the main website where:
+
+Students can:
+
+Login using Google
+Select standard & subjects
+Take quizzes
+Earn coins
+Maintain streaks
+View leaderboard
+See other student profiles
+Track activity (GitHub-style green dots)
+
+Admin can:
+
+Add/edit quiz questions
+Track student performance
+Monitor leaderboard
+Manage students
+2️⃣ TECH STACK
+
+Frontend:
+
+Next.js 14 (App Router)
+TypeScript
+Tailwind CSS
+
+Backend:
+
+Supabase
+PostgreSQL database
+Supabase Auth (Google OAuth)
+Supabase Storage
+
+State Management:
+
+Zustand
+
+Charts:
+
+Recharts
+
+Animations:
+
+Framer Motion
+
+Deployment:
+
+Vercel
+3️⃣ USER ROLES
+
+There are 2 roles:
+
+Role 1 — Student
+
+Capabilities:
+
+Login with Google
+Select grade
+Select subjects
+Take quizzes
+Earn coins
+Maintain streak
+View leaderboard
+View profiles
+Track activity
+Role 2 — Admin
+
+Login route:
+
+/admin
+
+Credentials:
+
+Username:
+
+nilesh7226004200+Ab
+
+Password:
+
+vanaja7226004200+Ab
+
+Admin Capabilities:
+
+Manage quiz questions
+View student analytics
+Monitor leaderboard
+Track performance
+View subject analytics
+
+⚠️ Store credentials in environment variables.
+
+4️⃣ STUDENT FEATURES
+4.1 Student Login
+Location
+
+Navbar button:
+
+Student Login
+Flow
+
+Click →
+
+/student/login
+
+Login method:
+
+Google OAuth
+
+Using:
+
+Supabase Auth
+
+4.2 Student Onboarding
+
+Shown only on:
+
+First login.
+
+Route:
+
+/student/onboarding
+
+Fields:
+
+Full Name (from Google)
+
+Standard:
+
+Dropdown:
+
+Standard 8
+Standard 9
+Standard 10
+Standard 11
+Standard 12
+
+Subjects:
+
+Multi-select:
+
+Mathematics
+Science
+English
+Social Science
+Physics
+Chemistry
+Biology
+IIT-JEE
+NEET
+
+Save into:
+
+students table.
+
+4.3 Student Dashboard
+
+Route:
+
+/student/dashboard
+
+Displays:
+
+Welcome message
+Coins earned
+Current streak
+Leaderboard rank
+Activity heatmap
+Quick quiz button
+4.4 Quiz System
+
+Route:
+
+/student/quiz
+
+Steps:
+
+Select Standard
+Select Subject
+Start Quiz
+
+Question Type:
+
+MCQ
+
+Each Question:
+
+Question text
+4 options
+Correct answer
+
+Logic:
+
+Correct answer:
+
++5 coins
+
+Wrong answer:
+
+0 coins
+
+Save attempt.
+
+4.5 Coins System 🪙
+
+Coins are earned when:
+
+Answer correct
+Complete quizzes
+
+Coins stored in:
+
+students table.
+
+4.6 Streak System 🔥
+
+Streak increases when:
+
+Student completes quiz daily.
+
+If day missed:
+
+Reset streak.
+
+4.7 Leaderboard
+
+Route:
+
+/student/leaderboard
+
+Sorting:
+
+Coins (Descending)
+
+Columns:
+
+Rank
+Student Name
+Coins
+Streak
+
+Clickable:
+
+Student →
+
+Open profile.
+
+4.8 Student Profile
+
+Route:
+
+/student/profile/[studentId]
+
+Shows:
+
+Name
+Standard
+Subjects
+Coins
+Streak
+Activity heatmap
+Quiz accuracy
+
+Students can view:
+
+Other student profiles.
+
+4.9 Activity Heatmap
+
+(GitHub Style Green Grid)
+
+Display:
+
+Monthly grid:
+
+30 days.
+
+Color Logic:
+
+Activity	Color
+0	Gray
+1–3	Light Green
+4–6	Medium Green
+7+	Dark Green
+
+Reset:
+
+Every month.
+
+Old records deleted.
+
+5️⃣ ADMIN FEATURES
+5.1 Admin Login
+
+Route:
+
+/admin
+
+Login:
+
+Username + Password.
+
+Store in:
+
+.env.local
+
+Example:
+
+ADMIN_USERNAME=nilesh7226004200+Ab
+ADMIN_PASSWORD=vanaja7226004200+Ab
+
+Redirect:
+
+/admin/dashboard
+5.2 Admin Dashboard
+
+Route:
+
+/admin/dashboard
+
+Displays charts:
+
+Total Students
+Coins by Subject
+Quiz Attempts
+Leaderboard Preview
+
+Use:
+
+Recharts.
+
+5.3 Question Management
+
+Route:
+
+/admin/questions
+
+Admin can:
+
+Create question.
+
+Fields:
+
+Standard
+Subject
+Question
+Option A
+Option B
+Option C
+Option D
+Correct Answer
+Coins Reward
+
+Admin can:
+
+Edit question
+Delete question
+5.4 Student Performance Dashboard
+
+Route:
+
+/admin/students
+
+Table:
+
+Student Name
+Standard
+Coins
+Streak
+Last Active
+
+Click student:
+
+Open detailed view.
+
+Shows:
+
+Coins by subject
+Quiz accuracy
+Activity heatmap
+6️⃣ DATABASE DESIGN (SUPABASE)
+Table — students
+
+Fields:
+
+id uuid primary key
+email text
+name text
+standard text
+subjects text[]
+coins integer default 0
+streak_days integer default 0
+created_at timestamp
+Table — quiz_questions
+id uuid
+standard text
+subject text
+question text
+options jsonb
+correct_answer text
+coins_reward integer
+created_at timestamp
+Table — quiz_attempts
+id uuid
+student_id uuid
+question_id uuid
+is_correct boolean
+coins_earned integer
+created_at timestamp
+Table — activity_logs
+id uuid
+student_id uuid
+date date
+activity_count integer
+
+Used for:
+
+Heatmap + streak.
+
+7️⃣ SECURITY REQUIREMENTS 🔐
+
+Use:
+
+Supabase Row Level Security (RLS)
+
+Rules:
+
+Students:
+
+Can read own data
+Can read leaderboard
+
+Admin:
+
+Full access.
+
+8️⃣ UI/UX DESIGN
+
+Theme:
+
+Modern education dashboard.
+
+Primary Color:
+
+#0ea5e9
+
+Secondary:
+
+#22c55e
+
+Font:
+
+Inter
+
+Design Style:
+
+Clean
+Student-friendly
+Mobile responsive
+
+9️⃣ PERFORMANCE REQUIREMENTS
+
+Use:
+
+Server Components
+Lazy Loading
+Suspense
+API caching
+
+Goal:
+
+Fast loading.
+
+🔟 OPTIONAL FUTURE FEATURES (HIGH VALUE)
+
+Recommended additions:
+
+PDF Notes Upload 📄
+Mock Test Timer ⏱️
+Badge System 🏆
+Parent Dashboard 👨‍👩‍👧
+Weak Subject Detection 📊
+Weekly Leaderboard
+
+These are very valuable for IIT-JEE / NEET coaching students.
+
+11️⃣ ROUTE STRUCTURE
+/student/login
+/student/onboarding
+/student/dashboard
+/student/quiz
+/student/leaderboard
+/student/profile/[id]
+
+/admin
+/admin/dashboard
+/admin/questions
+/admin/students
+12️⃣ SUCCESS METRICS 📊
+
+System success measured by:
+
+Number of student logins
+Quiz attempts per day
+Daily active users
+Student streak retention
+Leaderboard engagement
