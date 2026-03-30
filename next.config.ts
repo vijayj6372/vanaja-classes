@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   devIndicators: false,
+  allowedDevOrigins: ['*.replit.dev', '*.kirk.replit.dev'],
   images: {
     remotePatterns: [
       {
