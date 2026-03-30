@@ -218,9 +218,7 @@ const jsonLd = {
     "telephone": "+91-72260-04200",
     "contactType": "customer service"
   },
-  "sameAs": [
-    // Add social media links here if they exist
-  ]
+  "sameAs": []
 };
 
 export const viewport = {
@@ -244,6 +242,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning
       >
         {children}
       </body>
