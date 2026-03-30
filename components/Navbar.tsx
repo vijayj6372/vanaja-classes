@@ -35,6 +35,12 @@ const Navbar: React.FC = () => {
                                 {item.label}
                             </Link>
                         ))}
+                        <Link
+                            href="/student/login"
+                            className="bg-[#0ea5e9] text-white px-5 lg:px-6 py-2.5 lg:py-3 rounded-xl font-bold hover:bg-sky-600 transition-all transform hover:scale-105 shadow-md text-xs uppercase"
+                        >
+                            Student Login
+                        </Link>
                         <a href="https://wa.me/917226004200" target="_blank" rel="noopener noreferrer" className="bg-[#E31E24] text-white px-5 lg:px-6 py-2.5 lg:py-3 rounded-xl font-bold hover:bg-red-700 transition-all transform hover:scale-105 shadow-md text-xs uppercase">
                             Admissions Open
                         </a>
@@ -66,6 +72,13 @@ const Navbar: React.FC = () => {
                                 {item.label}
                             </Link>
                         ))}
+                        <Link
+                            href="/student/login"
+                            onClick={() => setIsOpen(false)}
+                            className="w-full max-w-xs bg-[#0ea5e9] text-white py-5 rounded-2xl font-black text-xl shadow-xl shadow-sky-200 text-center block uppercase tracking-tighter"
+                        >
+                            STUDENT LOGIN
+                        </Link>
                         <a
                             href="https://wa.me/917226004200"
                             target="_blank"
