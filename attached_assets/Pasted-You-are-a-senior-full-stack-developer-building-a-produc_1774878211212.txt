@@ -1,0 +1,490 @@
+You are a senior full-stack developer building a production-ready system.
+
+PROJECT NAME:
+Vanaja Coaching Classes Student Quiz Platform
+
+TECH STACK:
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS
+- Supabase (Database + Auth + Storage)
+- Supabase Google OAuth
+- Zustand (state management)
+- Recharts (dashboard analytics)
+- Framer Motion (UI animations)
+
+DOMAIN:
+https://www.vanajacoachingclasses.in
+
+BUSINESS TYPE:
+Coaching classes for:
+- Standard 8–12
+- CBSE
+- GSEB
+- IIT-JEE
+- NEET
+
+---------------------------------------
+
+CORE FEATURE GOAL:
+
+Build a Student Login + Quiz + Leaderboard + Admin Panel system.
+
+---------------------------------------
+
+FEATURE 1 — NAVBAR STUDENT LOGIN
+
+Add:
+
+Button: "Student Login"
+
+Location:
+Navbar (right side)
+
+When clicked:
+
+Redirect to:
+
+/student/login
+
+---------------------------------------
+
+FEATURE 2 — GOOGLE LOGIN (SUPABASE AUTH)
+
+Use:
+
+Supabase Google OAuth login
+
+After login:
+
+Check:
+
+If first-time user → redirect:
+
+/student/onboarding
+
+Else:
+
+/student/dashboard
+
+---------------------------------------
+
+FEATURE 3 — STUDENT ONBOARDING
+
+Route:
+
+/student/onboarding
+
+Form Fields:
+
+1. Full Name (auto from Google)
+2. Standard (Dropdown)
+
+Options:
+
+Standard 8
+Standard 9
+Standard 10
+Standard 11
+Standard 12
+
+3. Subjects (Multi-select)
+
+Options:
+
+Mathematics
+Science
+English
+Social Science
+Physics
+Chemistry
+Biology
+IIT-JEE
+NEET
+
+Save into:
+
+Supabase "students" table.
+
+---------------------------------------
+
+FEATURE 4 — DATABASE SCHEMA (SUPABASE)
+
+Create Tables:
+
+students
+
+Fields:
+
+id (uuid primary key)
+email (text)
+name (text)
+standard (text)
+subjects (text[])
+coins (int default 0)
+streak_days (int default 0)
+created_at (timestamp)
+
+---------------------------------------
+
+quiz_questions
+
+Fields:
+
+id (uuid)
+standard (text)
+subject (text)
+question (text)
+options (jsonb)
+correct_answer (text)
+coins_reward (int)
+
+---------------------------------------
+
+quiz_attempts
+
+Fields:
+
+id (uuid)
+student_id (uuid)
+question_id (uuid)
+is_correct (boolean)
+coins_earned (int)
+created_at (timestamp)
+
+---------------------------------------
+
+activity_logs
+
+(Github-style green dots)
+
+Fields:
+
+id (uuid)
+student_id (uuid)
+date (date)
+activity_count (int)
+
+IMPORTANT:
+
+Reset logs every month:
+
+- Delete records older than 30 days automatically
+- Use Supabase cron job
+
+---------------------------------------
+
+FEATURE 5 — STUDENT DASHBOARD
+
+Route:
+
+/student/dashboard
+
+Show:
+
+- Welcome message
+- Coins earned
+- Current streak
+- Leaderboard position
+- Monthly activity grid
+(Github green dots style)
+
+Create:
+
+7 x 5 grid (month view)
+
+Color logic:
+
+0 activity → gray
+1–3 → light green
+4–6 → medium green
+7+ → dark green
+
+---------------------------------------
+
+FEATURE 6 — QUIZ SYSTEM
+
+Route:
+
+/student/quiz
+
+Features:
+
+- Select Standard
+- Select Subject
+- Start Quiz
+
+Quiz Format:
+
+MCQ
+
+Each question:
+
+- 4 options
+- Instant answer check
+- Add coins on correct answer
+- Save attempt
+
+Coins logic:
+
+Correct → +5 coins
+Wrong → 0 coins
+
+---------------------------------------
+
+FEATURE 7 — LEADERBOARD
+
+Route:
+
+/student/leaderboard
+
+Show:
+
+Top students sorted by:
+
+Coins (descending)
+
+Columns:
+
+Rank
+Student Name
+Coins
+Streak
+
+Clickable:
+
+Click any student →
+
+Open profile:
+
+/student/profile/[id]
+
+---------------------------------------
+
+FEATURE 8 — STUDENT PROFILE PAGE
+
+Route:
+
+/student/profile/[id]
+
+Show:
+
+- Name
+- Standard
+- Subjects
+- Total Coins
+- Current Streak
+- Monthly activity grid
+- Quiz accuracy percentage
+
+Allow:
+
+Students can view other students' profiles.
+
+---------------------------------------
+
+FEATURE 9 — STREAK SYSTEM
+
+Logic:
+
+If student completes quiz today:
+
+Increase streak +1
+
+If missed a day:
+
+Reset streak to 0
+
+Use:
+
+activity_logs table.
+
+---------------------------------------
+
+FEATURE 10 — ADMIN PANEL LOGIN
+
+Route:
+
+/admin
+
+Login Type:
+
+Username + Password
+
+Credentials:
+
+Username:
+
+nilesh7226004200+Ab
+
+Password:
+
+vanaja7226004200+Ab
+
+Store securely:
+
+Use environment variables:
+
+ADMIN_USERNAME
+ADMIN_PASSWORD
+
+After login:
+
+Redirect:
+
+/admin/dashboard
+
+---------------------------------------
+
+FEATURE 11 — ADMIN DASHBOARD
+
+Route:
+
+/admin/dashboard
+
+Show:
+
+Charts using Recharts:
+
+1. Total students
+2. Coins earned by subject
+3. Quiz attempts per standard
+4. Leaderboard preview
+
+---------------------------------------
+
+FEATURE 12 — ADMIN QUESTION MANAGER
+
+Route:
+
+/admin/questions
+
+Admin can:
+
+Create question
+
+Fields:
+
+Standard
+Subject
+Question
+4 Options
+Correct Answer
+Coins Reward
+
+Admin can:
+
+Edit questions
+Delete questions
+
+---------------------------------------
+
+FEATURE 13 — ADMIN STUDENT ANALYTICS
+
+Route:
+
+/admin/students
+
+Show table:
+
+Student Name
+Standard
+Coins
+Streak
+Last Active Date
+
+Click student →
+
+See detailed analytics:
+
+Coins per subject
+Accuracy %
+Activity heatmap
+
+---------------------------------------
+
+FEATURE 14 — SECURITY RULES
+
+Use Supabase RLS:
+
+Students:
+
+Can read own data
+Can read leaderboard
+
+Admin:
+
+Full access.
+
+---------------------------------------
+
+FEATURE 15 — UI DESIGN STYLE
+
+Theme:
+
+Modern Education Dashboard
+
+Colors:
+
+Primary:
+
+#0ea5e9
+
+Secondary:
+
+#22c55e
+
+Font:
+
+Inter
+
+Add:
+
+Framer Motion animations.
+
+---------------------------------------
+
+FEATURE 16 — PERFORMANCE OPTIMIZATION
+
+Use:
+
+Server Components
+Suspense
+Lazy loading
+Caching queries
+
+---------------------------------------
+
+FEATURE 17 — BONUS FEATURES (OPTIONAL)
+
+Add:
+
+1. Daily quiz reminder
+2. Badge system
+3. Achievement levels
+4. Subject-wise leaderboard
+5. Weekly leaderboard reset
+
+---------------------------------------
+
+OUTPUT REQUIRED:
+
+Generate:
+
+- Folder structure
+- Supabase schema SQL
+- Next.js API routes
+- Authentication logic
+- Dashboard UI
+- Admin panel
+- Quiz system
+- Leaderboard system
+- Activity heatmap
+- Google OAuth setup
+
+Code must be:
+
+Production-ready
+Fully typed
+Clean architecture
+Scalable
