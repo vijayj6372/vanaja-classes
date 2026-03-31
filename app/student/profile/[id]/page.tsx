@@ -26,8 +26,7 @@ function ActivityGrid({ logs }: { logs: ActivityLog[] }) {
   return (
     <div className="grid grid-cols-7 gap-1.5">
       {cells.map((cell, i) => (
-        <div key={i} title={`${cell.date}: ${cell.count}`}
-          className={`w-full aspect-square rounded-sm ${getColor(cell.count)}`} />
+        <div key={i} title={`${cell.date}: ${cell.count}`} className={`w-full aspect-square rounded-sm ${getColor(cell.count)}`} />
       ))}
     </div>
   );
@@ -43,23 +42,19 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
 
   useEffect(() => {
     async function load() {
-      const { data: studentData } = await supabase.from('students').select('*').eq('id', id).single();
-      setStudent(studentData);
-
-      const { data: logData } = await supabase.from('activity_logs').select('*').eq('student_id', id);
-      setLogs(logData || []);
-
-      const { data: attempts } = await supabase.from('quiz_attempts').select('is_correct').eq('student_id', id);
-      if (attempts && attempts.length > 0) {
-        const correct = attempts.filter(a => a.is_correct).length;
-        setAccuracy(Math.round((correct / attempts.length) * 100));
+      const [studentRes, logsRes, attemptsRes, rankRes] = await Promise.all([
+        supabase.from('students').select('*').eq('id', id).single(),
+        supabase.from('activity_logs').select('*').eq('student_id', id),
+        supabase.from('quiz_attempts').select('is_correct').eq('student_id', id),
+        fetch('/api/student/rank?id=' + id),
+      ]);
+      setStudent(studentRes.data);
+      setLogs(logsRes.data || []);
+      if (attemptsRes.data && attemptsRes.data.length > 0) {
+        const correct = attemptsRes.data.filter(a => a.is_correct).length;
+        setAccuracy(Math.round((correct / attemptsRes.data.length) * 100));
       }
-
-      const { data: allStudents } = await supabase.from('students').select('id, coins').order('coins', { ascending: false });
-      if (allStudents) {
-        const idx = allStudents.findIndex(s => s.id === id);
-        setRank(idx + 1);
-      }
+      if (rankRes.ok) setRank((await rankRes.json()).rank);
       setLoading(false);
     }
     load();
@@ -86,9 +81,7 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
         <Link href="/student/leaderboard" className="flex items-center gap-2 text-slate-500 hover:text-slate-700 mb-8 font-medium">
           <ArrowLeft size={18} /> Back to Leaderboard
         </Link>
-
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-3xl shadow-lg p-8 mb-6">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-white rounded-3xl shadow-lg p-8 mb-6">
           <div className="flex items-center gap-5 mb-6">
             <div className="w-20 h-20 bg-gradient-to-br from-[#0ea5e9] to-[#22c55e] rounded-2xl flex items-center justify-center text-white font-black text-3xl shadow-lg">
               {student.name?.charAt(0).toUpperCase()}
@@ -103,7 +96,6 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
               </div>
             </div>
           </div>
-
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {[
               { icon: <Coins size={18} className="text-yellow-500" />, label: 'Coins', value: student.coins },
@@ -119,9 +111,7 @@ export default function ProfilePage({ params }: { params: Promise<{ id: string }
             ))}
           </div>
         </motion.div>
-
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-          className="bg-white rounded-3xl shadow-lg p-8">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-white rounded-3xl shadow-lg p-8">
           <h2 className="text-lg font-black text-slate-800 mb-4">Monthly Activity</h2>
           <ActivityGrid logs={logs} />
         </motion.div>

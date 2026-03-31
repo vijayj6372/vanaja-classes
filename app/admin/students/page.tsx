@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
 import { Student } from '@/lib/types';
-import { X, ClipboardList, BarChart2, Users } from 'lucide-react';
+import { X, ClipboardList, BarChart2, Users, UserPlus } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
@@ -71,8 +71,9 @@ export default function StudentsPage() {
         <nav className="flex-1 p-4 space-y-1">
           {[
             { href: '/admin/dashboard', icon: <BarChart2 size={18} />, label: 'Dashboard' },
-            { href: '/admin/questions', icon: <ClipboardList size={18} />, label: 'Questions' },
+            { href: '/admin/create-student', icon: <UserPlus size={18} />, label: 'Create Student' },
             { href: '/admin/students', icon: <Users size={18} />, label: 'Students' },
+            { href: '/admin/questions', icon: <ClipboardList size={18} />, label: 'Questions' },
           ].map(item => (
             <Link key={item.href} href={item.href}
               className={`flex items-center gap-3 px-4 py-3 rounded-xl font-semibold transition-all text-sm ${item.href === '/admin/students' ? 'bg-purple-600 text-white' : 'text-slate-300 hover:bg-slate-700 hover:text-white'}`}>

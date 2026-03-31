@@ -1,106 +1,101 @@
 -- ============================================
--- Vanaja Coaching Classes - Supabase Schema
+-- VANAJA COACHING CLASSES - STUDENT QUIZ PLATFORM
+-- Updated Schema: Username/Password Login (No Google OAuth)
 -- Run this in your Supabase SQL Editor
 -- ============================================
 
--- Students table
-CREATE TABLE IF NOT EXISTS students (
-  id UUID PRIMARY KEY,
-  email TEXT NOT NULL,
-  name TEXT NOT NULL,
-  standard TEXT NOT NULL,
-  subjects TEXT[] DEFAULT '{}',
-  coins INT DEFAULT 0,
-  streak_days INT DEFAULT 0,
-  created_at TIMESTAMPTZ DEFAULT NOW()
+-- Drop existing tables if rebuilding
+DROP TABLE IF EXISTS activity_logs CASCADE;
+DROP TABLE IF EXISTS quiz_attempts CASCADE;
+DROP TABLE IF EXISTS quiz_questions CASCADE;
+DROP TABLE IF EXISTS students CASCADE;
+
+-- Drop existing function
+DROP FUNCTION IF EXISTS increment_coins(uuid, integer);
+
+-- ============================================
+-- STUDENTS TABLE (username/password auth)
+-- ============================================
+CREATE TABLE students (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  username text UNIQUE NOT NULL,
+  password_hash text NOT NULL,
+  name text NOT NULL,
+  standard text NOT NULL,
+  subjects text[] NOT NULL DEFAULT '{}',
+  coins integer NOT NULL DEFAULT 0,
+  streak_days integer NOT NULL DEFAULT 0,
+  created_at timestamptz NOT NULL DEFAULT now()
 );
 
--- Quiz Questions table
-CREATE TABLE IF NOT EXISTS quiz_questions (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  standard TEXT NOT NULL,
-  subject TEXT NOT NULL,
-  question TEXT NOT NULL,
-  options JSONB NOT NULL,
-  correct_answer TEXT NOT NULL,
-  coins_reward INT DEFAULT 5,
-  created_at TIMESTAMPTZ DEFAULT NOW()
+-- ============================================
+-- QUIZ QUESTIONS TABLE
+-- ============================================
+CREATE TABLE quiz_questions (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  standard text NOT NULL,
+  subject text NOT NULL,
+  question text NOT NULL,
+  options jsonb NOT NULL DEFAULT '[]',
+  correct_answer text NOT NULL,
+  coins_reward integer NOT NULL DEFAULT 5,
+  created_at timestamptz NOT NULL DEFAULT now()
 );
 
--- Quiz Attempts table
-CREATE TABLE IF NOT EXISTS quiz_attempts (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  student_id UUID REFERENCES students(id) ON DELETE CASCADE,
-  question_id UUID REFERENCES quiz_questions(id) ON DELETE CASCADE,
-  is_correct BOOLEAN NOT NULL,
-  coins_earned INT DEFAULT 0,
-  created_at TIMESTAMPTZ DEFAULT NOW()
+-- ============================================
+-- QUIZ ATTEMPTS TABLE
+-- ============================================
+CREATE TABLE quiz_attempts (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  student_id uuid NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+  question_id uuid NOT NULL REFERENCES quiz_questions(id) ON DELETE CASCADE,
+  is_correct boolean NOT NULL DEFAULT false,
+  coins_earned integer NOT NULL DEFAULT 0,
+  created_at timestamptz NOT NULL DEFAULT now()
 );
 
--- Activity Logs table (GitHub-style heatmap)
-CREATE TABLE IF NOT EXISTS activity_logs (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  student_id UUID REFERENCES students(id) ON DELETE CASCADE,
-  date DATE NOT NULL,
-  activity_count INT DEFAULT 1,
+-- ============================================
+-- ACTIVITY LOGS TABLE (GitHub-style heatmap)
+-- ============================================
+CREATE TABLE activity_logs (
+  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  student_id uuid NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+  date date NOT NULL,
+  activity_count integer NOT NULL DEFAULT 0,
   UNIQUE(student_id, date)
 );
 
 -- ============================================
--- RPC: Increment coins safely
+-- INDEXES
 -- ============================================
-CREATE OR REPLACE FUNCTION increment_coins(student_id UUID, amount INT)
-RETURNS VOID AS $$
-BEGIN
-  UPDATE students SET coins = coins + amount WHERE id = student_id;
-END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+CREATE INDEX idx_students_username ON students(username);
+CREATE INDEX idx_students_coins ON students(coins DESC);
+CREATE INDEX idx_quiz_questions_standard_subject ON quiz_questions(standard, subject);
+CREATE INDEX idx_quiz_attempts_student_id ON quiz_attempts(student_id);
+CREATE INDEX idx_activity_logs_student_date ON activity_logs(student_id, date);
 
 -- ============================================
--- Row Level Security (RLS)
+-- RLS POLICIES
+-- Auth is handled server-side via JWT cookies.
+-- Anon key is used from server-side API routes only.
 -- ============================================
-
--- Enable RLS
 ALTER TABLE students ENABLE ROW LEVEL SECURITY;
 ALTER TABLE quiz_questions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE quiz_attempts ENABLE ROW LEVEL SECURITY;
 ALTER TABLE activity_logs ENABLE ROW LEVEL SECURITY;
 
--- Students: can read their own data + leaderboard (all students)
-CREATE POLICY "Students can read all students (leaderboard)" ON students
-  FOR SELECT USING (true);
-
-CREATE POLICY "Students can insert own data" ON students
-  FOR INSERT WITH CHECK (auth.uid() = id);
-
-CREATE POLICY "Students can update own data" ON students
-  FOR UPDATE USING (auth.uid() = id);
-
--- Quiz Questions: anyone authenticated can read
-CREATE POLICY "Authenticated users can read questions" ON quiz_questions
-  FOR SELECT USING (auth.role() = 'authenticated');
-
--- Admin full access to questions (via service role)
-CREATE POLICY "Service role full access to questions" ON quiz_questions
-  USING (true) WITH CHECK (true);
-
--- Quiz Attempts: students can insert own, read own
-CREATE POLICY "Students can insert own attempts" ON quiz_attempts
-  FOR INSERT WITH CHECK (auth.uid() = student_id);
-
-CREATE POLICY "Students can read own attempts" ON quiz_attempts
-  FOR SELECT USING (auth.uid() = student_id);
-
--- Activity Logs: students can manage own
-CREATE POLICY "Students can manage own activity logs" ON activity_logs
-  FOR ALL USING (auth.uid() = student_id);
+-- Allow all operations for anon key (server-side API routes use anon key)
+CREATE POLICY "Allow all for anon" ON students FOR ALL TO anon USING (true) WITH CHECK (true);
+CREATE POLICY "Allow all for anon" ON quiz_questions FOR ALL TO anon USING (true) WITH CHECK (true);
+CREATE POLICY "Allow all for anon" ON quiz_attempts FOR ALL TO anon USING (true) WITH CHECK (true);
+CREATE POLICY "Allow all for anon" ON activity_logs FOR ALL TO anon USING (true) WITH CHECK (true);
 
 -- ============================================
--- Cron Job: Delete logs older than 30 days
--- Enable pg_cron extension first in Supabase
+-- INCREMENT COINS FUNCTION
 -- ============================================
--- SELECT cron.schedule(
---   'delete-old-activity-logs',
---   '0 0 * * *',
---   $$DELETE FROM activity_logs WHERE date < CURRENT_DATE - INTERVAL '30 days';$$
--- );
+CREATE OR REPLACE FUNCTION increment_coins(student_id uuid, amount integer)
+RETURNS void AS $$
+BEGIN
+  UPDATE students SET coins = coins + amount WHERE id = student_id;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;

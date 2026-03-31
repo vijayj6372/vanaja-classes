@@ -7,7 +7,7 @@ import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
   PieChart, Pie, Cell, Legend
 } from 'recharts';
-import { Users, BookOpen, Trophy, Coins, LogOut, ClipboardList, BarChart2 } from 'lucide-react';
+import { Users, BookOpen, Trophy, Coins, LogOut, ClipboardList, BarChart2, UserPlus } from 'lucide-react';
 import Link from 'next/link';
 
 const COLORS = ['#0ea5e9', '#22c55e', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#14b8a6'];
@@ -72,8 +72,9 @@ export default function AdminDashboard() {
         <nav className="flex-1 p-4 space-y-1">
           {[
             { href: '/admin/dashboard', icon: <BarChart2 size={18} />, label: 'Dashboard' },
-            { href: '/admin/questions', icon: <ClipboardList size={18} />, label: 'Questions' },
+            { href: '/admin/create-student', icon: <UserPlus size={18} />, label: 'Create Student' },
             { href: '/admin/students', icon: <Users size={18} />, label: 'Students' },
+            { href: '/admin/questions', icon: <ClipboardList size={18} />, label: 'Questions' },
           ].map(item => (
             <Link key={item.href} href={item.href}
               className="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-slate-300 hover:bg-slate-700 hover:text-white transition-all text-sm">

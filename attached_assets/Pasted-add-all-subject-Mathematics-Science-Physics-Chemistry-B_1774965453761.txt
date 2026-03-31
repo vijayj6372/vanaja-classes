@@ -1,0 +1,416 @@
+add all subject Mathematics 
+Science 
+Physics 
+Chemistry 
+Biology 
+social studies 
+English 
+Hindi ---Great — switching from Google OAuth to Username + Password login is actually better for coaching institutes, because you can create student IDs manually (like school roll numbers).
+
+I'll update your PRD properly for Username/Password login using Supabase Auth, not Google.
+
+📘 UPDATED PROJECT REQUIREMENT DOCUMENT (PRD)
+Student Username–Password Login System
+
+For Vanaja Personal Care Coaching Classes
+
+🔁 MAJOR CHANGE FROM YOUR ORIGINAL PRD
+
+Replace:
+
+❌ Google OAuth Login
+
+With:
+
+✅ Username + Password Login
+✅ Admin creates student accounts
+✅ Students login using username + password
+
+This is much better for coaching classes because:
+
+Students don't need Gmail
+You control account creation
+Works like school login
+Easy to manage batches
+1️⃣ STUDENT LOGIN SYSTEM (UPDATED)
+Login Method
+
+Students login using:
+
+Username
+Password
+
+NOT Google OAuth.
+
+Login Route
+/student/login
+Login Form Fields
+Username
+Password
+Login Button
+
+Optional:
+
+Forgot Password
+Login Flow
+Student enters:
+
+username
+password
+
+↓
+
+Validate using Supabase Auth
+
+↓
+
+If valid:
+
+Redirect:
+
+/student/dashboard
+2️⃣ STUDENT ACCOUNT CREATION (IMPORTANT CHANGE)
+
+Students will NOT self-register.
+
+Admin creates accounts.
+
+This is how real coaching systems work.
+
+Admin Creates Student
+
+Route:
+
+/admin/create-student
+
+Form Fields:
+
+Student Name
+Username
+Password
+Standard
+Subjects
+
+Example:
+
+Name: Rahul Patel
+Username: rahul10
+Password: rahul@123
+Standard: 10
+Subjects: Maths, Science
+
+Save into:
+
+Supabase Auth + students table.
+
+3️⃣ DATABASE DESIGN (UPDATED)
+
+We must store username + password.
+
+Table — students (UPDATED)
+id uuid primary key
+username text unique
+password_hash text
+name text
+standard text
+subjects text[]
+coins integer default 0
+streak_days integer default 0
+created_at timestamp
+
+⚠️ Password must be hashed
+Use:
+
+bcrypt
+
+Never store plain password.
+
+Table — quiz_questions
+
+Same as before:
+
+id uuid
+standard text
+subject text
+question text
+options jsonb
+correct_answer text
+coins_reward integer
+created_at timestamp
+Table — quiz_attempts
+id uuid
+student_id uuid
+question_id uuid
+is_correct boolean
+coins_earned integer
+created_at timestamp
+Table — activity_logs
+
+Used for heatmap:
+
+id uuid
+student_id uuid
+date date
+activity_count integer
+4️⃣ STUDENT DASHBOARD FEATURES
+
+Route:
+
+/student/dashboard
+
+Show:
+
+Student Name
+Coins
+Streak
+Leaderboard Rank
+Activity Heatmap
+Start Quiz Button
+5️⃣ QUIZ SYSTEM
+
+Route:
+
+/student/quiz
+
+Steps:
+
+1 Select Standard
+2 Select Subject
+3 Start Quiz
+
+Question Format
+
+MCQ:
+
+Question
+
+A
+B
+C
+D
+Coins Logic
+
+Correct:
+
++5 coins
+
+Wrong:
+
+0 coins
+
+Save attempt.
+
+6️⃣ LEADERBOARD SYSTEM
+
+Route:
+
+/student/leaderboard
+
+Sort:
+
+coins DESC
+
+Columns:
+
+Rank
+Name
+Coins
+Streak
+
+Clickable:
+
+Open Profile
+7️⃣ STUDENT PROFILE PAGE
+
+Route:
+
+/student/profile/[id]
+
+Show:
+
+Name
+Standard
+Subjects
+Coins
+Streak
+Accuracy %
+Activity Heatmap
+
+Students can view:
+
+Other students.
+
+8️⃣ ACTIVITY HEATMAP (GITHUB STYLE)
+
+Monthly grid:
+
+30 days
+
+Color Rules:
+
+Activity	Color
+0	Gray
+1–3	Light Green
+4–6	Medium Green
+7+	Dark Green
+Monthly Reset Logic
+
+Every month:
+
+Delete records older than 30 days
+
+Use:
+
+Supabase cron job
+9️⃣ STREAK SYSTEM
+
+Rule:
+
+If student completes quiz today:
+
+streak +1
+
+If missed day:
+
+streak = 0
+🔟 ADMIN LOGIN SYSTEM
+
+Route:
+
+/admin
+
+Login Fields:
+
+Username
+Password
+
+Store in:
+
+.env.local
+
+Example:
+
+ADMIN_USERNAME=nilesh7226004200+Ab
+ADMIN_PASSWORD=vanaja7226004200+Ab
+11️⃣ ADMIN DASHBOARD
+
+Route:
+
+/admin/dashboard
+
+Show:
+
+Charts:
+
+Total Students
+Coins by Subject
+Quiz Attempts
+Leaderboard Preview
+
+Use:
+
+Recharts
+12️⃣ ADMIN QUESTION MANAGER
+
+Route:
+
+/admin/questions
+
+Admin Can:
+
+Create:
+
+Standard
+Subject
+Question
+Option A
+Option B
+Option C
+Option D
+Correct Answer
+Coins Reward
+
+Admin Can:
+
+Edit Question
+Delete Question
+13️⃣ ADMIN STUDENT PERFORMANCE
+
+Route:
+
+/admin/students
+
+Table:
+
+Name
+Username
+Standard
+Coins
+Streak
+Last Active
+
+Click Student →
+
+Show:
+
+Coins by subject
+Accuracy %
+Activity Heatmap
+14️⃣ SECURITY REQUIREMENTS
+
+Must implement:
+
+bcrypt password hashing
+JWT authentication
+Supabase RLS
+Session protection
+
+Students:
+
+Access only own data
+
+Admin:
+
+Full access
+15️⃣ ROUTE STRUCTURE
+/student/login
+/student/dashboard
+/student/quiz
+/student/leaderboard
+/student/profile/[id]
+
+/admin
+/admin/dashboard
+/admin/create-student
+/admin/questions
+/admin/students
+16️⃣ REALISTIC USER FLOW (IMPORTANT)
+
+This is how your coaching will use it:
+
+Admin:
+
+Create Student:
+
+rahul10
+password: 12345
+standard: 10
+subjects: Maths Science
+
+Student:
+
+Open website
+Click Student Login
+Enter username/password
+Start quiz
+Earn coins
+Climb leaderboard
+17️⃣ WHY USERNAME LOGIN IS BETTER FOR YOU
+
+For coaching like yours:
+
+✅ Works offline batches
+✅ No Gmail required
+✅ Easy student control
+✅ Parents can manage login
+✅ Suitable for CBSE/GSEB

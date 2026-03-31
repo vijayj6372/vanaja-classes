@@ -1,6 +1,6 @@
 export interface Student {
   id: string;
-  email: string;
+  username: string;
   name: string;
   standard: string;
   subjects: string[];
@@ -46,11 +46,10 @@ export const STANDARDS = [
 export const SUBJECTS = [
   'Mathematics',
   'Science',
-  'English',
-  'Social Science',
   'Physics',
   'Chemistry',
   'Biology',
-  'IIT-JEE',
-  'NEET',
+  'Social Studies',
+  'English',
+  'Hindi',
 ];
