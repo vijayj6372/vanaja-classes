@@ -5,22 +5,30 @@ import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
 import { STANDARDS, SUBJECTS } from '@/lib/types';
 import { GraduationCap, CheckCircle } from 'lucide-react';
+import { Student } from '@/lib/types';
 
 export default function OnboardingPage() {
   const router = useRouter();
+  const [student, setStudent] = useState<Student | null>(null);
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
   const [standard, setStandard] = useState('');
   const [subjects, setSubjects] = useState<string[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      if (!user) { router.push('/student/login'); return; }
-      setName(user.user_metadata?.full_name || '');
-      setEmail(user.email || '');
-    });
+    async function load() {
+      const res = await fetch('/api/student/me');
+      if (!res.ok) { router.push('/student/login'); return; }
+      const { student: me } = await res.json();
+      setStudent(me);
+      setName(me.name || '');
+      setStandard(me.standard || '');
+      setSubjects(me.subjects || []);
+      setLoading(false);
+    }
+    load();
   }, [router]);
 
   const toggleSubject = (sub: string) => {
@@ -28,32 +36,31 @@ export default function OnboardingPage() {
   };
 
   const handleSubmit = async () => {
-    if (!standard || subjects.length === 0) {
-      setError('Please select your standard and at least one subject.');
+    if (!name.trim() || !standard || subjects.length === 0) {
+      setError('Please fill in your name, standard, and at least one subject.');
       return;
     }
-    setLoading(true);
+    setSaving(true);
     setError('');
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) { router.push('/student/login'); return; }
 
-    const { error: dbErr } = await supabase.from('students').insert({
-      id: user.id,
-      email,
-      name,
-      standard,
-      subjects,
-      coins: 0,
-      streak_days: 0,
-    });
+    const { error: dbErr } = await supabase
+      .from('students')
+      .update({ name: name.trim(), standard, subjects })
+      .eq('id', student!.id);
 
     if (dbErr) {
       setError(dbErr.message);
-      setLoading(false);
+      setSaving(false);
     } else {
       router.push('/student/dashboard');
     }
   };
+
+  if (loading) return (
+    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-emerald-50 flex items-center justify-center">
+      <div className="w-12 h-12 border-4 border-[#0ea5e9] border-t-transparent rounded-full animate-spin" />
+    </div>
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-emerald-50 flex items-center justify-center px-4 py-12">
@@ -68,7 +75,7 @@ export default function OnboardingPage() {
           </div>
           <div>
             <h1 className="text-2xl font-black text-slate-800">Complete Your Profile</h1>
-            <p className="text-slate-500 text-sm">Just a few details to get started</p>
+            <p className="text-slate-500 text-sm">Update your details to get started</p>
           </div>
         </div>
 
@@ -97,7 +104,9 @@ export default function OnboardingPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-bold text-slate-600 mb-3">Subjects <span className="text-slate-400 font-normal">(select all that apply)</span></label>
+            <label className="block text-sm font-bold text-slate-600 mb-3">
+              Subjects <span className="text-slate-400 font-normal">(select all that apply)</span>
+            </label>
             <div className="grid grid-cols-2 gap-2">
               {SUBJECTS.map(sub => (
                 <button
@@ -116,16 +125,16 @@ export default function OnboardingPage() {
             </div>
           </div>
 
-          {error && <p className="text-red-500 text-sm font-medium">{error}</p>}
+          {error && <p className="text-red-500 text-sm font-medium bg-red-50 px-4 py-2 rounded-xl">{error}</p>}
 
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleSubmit}
-            disabled={loading}
+            disabled={saving}
             className="w-full bg-gradient-to-r from-[#0ea5e9] to-[#22c55e] text-white font-black py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all disabled:opacity-60 text-lg"
           >
-            {loading ? 'Saving...' : 'Go to Dashboard →'}
+            {saving ? 'Saving...' : 'Save & Go to Dashboard →'}
           </motion.button>
         </div>
       </motion.div>
