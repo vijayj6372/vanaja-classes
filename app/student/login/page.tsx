@@ -2,9 +2,9 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import { GraduationCap, User, Lock, Eye, EyeOff, BookOpen } from 'lucide-react';
+import { GraduationCap, User, Lock, Eye, EyeOff, BookOpen, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
-import { STANDARDS } from '@/lib/types';
+import { STANDARDS, SUBJECTS } from '@/lib/types';
 
 export default function StudentLoginPage() {
   const router = useRouter();
@@ -21,8 +21,13 @@ export default function StudentLoginPage() {
   const [signPassword, setSignPassword] = useState('');
   const [showSignPw, setShowSignPw] = useState(false);
   const [signStandard, setSignStandard] = useState('');
+  const [signSubjects, setSignSubjects] = useState<string[]>([]);
   const [signLoading, setSignLoading] = useState(false);
   const [signError, setSignError] = useState('');
+
+  const toggleSignSubject = (sub: string) => {
+    setSignSubjects(prev => prev.includes(sub) ? prev.filter(s => s !== sub) : [...prev, sub]);
+  };
 
   const handleLogin = async () => {
     if (!username || !password) { setError('Please enter your username and password.'); return; }
@@ -47,6 +52,10 @@ export default function StudentLoginPage() {
       setSignError('Please fill in all fields.');
       return;
     }
+    if (signSubjects.length === 0) {
+      setSignError('Please select at least one subject.');
+      return;
+    }
     setSignLoading(true);
     setSignError('');
     const res = await fetch('/api/student/register', {
@@ -57,7 +66,7 @@ export default function StudentLoginPage() {
         username: signUsername,
         password: signPassword,
         standard: signStandard,
-        subjects: [],
+        subjects: signSubjects,
       }),
     });
     const data = await res.json();
@@ -214,6 +223,28 @@ export default function StudentLoginPage() {
                     <option value="">Select your standard</option>
                     {STANDARDS.map(s => <option key={s} value={s}>{s}</option>)}
                   </select>
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-bold text-slate-600 mb-2">
+                  Subjects <span className="text-slate-400 font-normal">(select all that apply)</span>
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  {SUBJECTS.map(sub => (
+                    <button
+                      key={sub}
+                      type="button"
+                      onClick={() => toggleSignSubject(sub)}
+                      className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all ${
+                        signSubjects.includes(sub)
+                          ? 'border-[#0ea5e9] bg-sky-50 text-[#0ea5e9]'
+                          : 'border-slate-200 text-slate-600 hover:border-slate-300'
+                      }`}
+                    >
+                      {signSubjects.includes(sub) && <CheckCircle size={13} className="shrink-0" />}
+                      {sub}
+                    </button>
+                  ))}
                 </div>
               </div>
               {signError && (

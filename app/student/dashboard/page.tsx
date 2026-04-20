@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { Student, ActivityLog } from '@/lib/types';
-import { Coins, Flame, Trophy, BookOpen, LogOut, ChevronRight } from 'lucide-react';
+import { Coins, Flame, Trophy, BookOpen, LogOut, ChevronRight, AlertCircle } from 'lucide-react';
 import Link from 'next/link';
 
 function ActivityGrid({ logs }: { logs: ActivityLog[] }) {
@@ -84,6 +84,20 @@ export default function DashboardPage() {
       </div>
 
       <div className="max-w-4xl mx-auto px-4 py-8 space-y-6">
+        {(!student?.subjects || student.subjects.length === 0) && (
+          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
+            className="bg-amber-50 border-2 border-amber-200 rounded-2xl p-4 flex items-center gap-3">
+            <AlertCircle size={20} className="text-amber-500 shrink-0" />
+            <div className="flex-1">
+              <p className="font-bold text-amber-800 text-sm">No subjects selected</p>
+              <p className="text-amber-600 text-xs mt-0.5">You need to select your subjects before you can take a quiz.</p>
+            </div>
+            <Link href="/student/onboarding"
+              className="shrink-0 bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all">
+              Update Now
+            </Link>
+          </motion.div>
+        )}
         <div className="grid grid-cols-3 gap-4">
           {[
             { icon: <Coins size={22} className="text-yellow-500" />, label: 'Coins', value: student?.coins || 0, bg: 'bg-yellow-50 border-yellow-100' },
