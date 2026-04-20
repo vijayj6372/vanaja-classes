@@ -38,3 +38,5 @@ externalPort = 80
 [userenv.shared]
 NEXT_PUBLIC_SUPABASE_URL = "https://zzpzkseqbzibhitesglw.supabase.co"
 NEXT_PUBLIC_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp6cHprc2VxYnppYmhpdGVzZ2x3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ4NjgzNjgsImV4cCI6MjA5MDQ0NDM2OH0.P07tZluHYoL_xtQqNCkIahgbZPQQzX2sWUEMXmgFGxY"
+ADMIN_USERNAME = "nilesh7226004200+Ab"
+ADMIN_PASSWORD = "vanaja7226004200+Ab"
