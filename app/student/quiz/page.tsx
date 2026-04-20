@@ -72,6 +72,13 @@ export default function QuizPage() {
       await supabase.from('activity_logs').insert({ student_id: userId, date: today, activity_count: 1 });
     }
 
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+    await supabase.from('activity_logs')
+      .delete()
+      .eq('student_id', userId)
+      .lt('date', thirtyDaysAgo.toISOString().split('T')[0]);
+
     setTimeout(() => {
       if (current + 1 < questions.length) {
         setCurrent(c => c + 1);
