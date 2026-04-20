@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
 import { Student } from '@/lib/types';
-import { X } from 'lucide-react';
+import { X, Trash2, AlertTriangle } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import AdminLayout from '@/components/AdminLayout';
 
@@ -14,13 +14,16 @@ export default function StudentsPage() {
   const [accuracy, setAccuracy] = useState<number | null>(null);
   const [lastActive, setLastActive] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [deleteTarget, setDeleteTarget] = useState<Student | null>(null);
+  const [deleting, setDeleting] = useState(false);
 
-  useEffect(() => {
-    supabase.from('students').select('*').order('coins', { ascending: false }).then(({ data }) => {
-      setStudents(data || []);
-      setLoading(false);
-    });
-  }, []);
+  const loadStudents = async () => {
+    const { data } = await supabase.from('students').select('*').order('coins', { ascending: false });
+    setStudents(data || []);
+    setLoading(false);
+  };
+
+  useEffect(() => { loadStudents(); }, []);
 
   const openStudent = async (student: Student) => {
     setSelected(student);
@@ -50,6 +53,24 @@ export default function StudentsPage() {
     setSubjectCoins(sc);
   };
 
+  const handleDelete = async () => {
+    if (!deleteTarget) return;
+    setDeleting(true);
+    const res = await fetch('/api/admin/delete-student', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ studentId: deleteTarget.id }),
+    });
+    setDeleting(false);
+    if (res.ok) {
+      setDeleteTarget(null);
+      setSelected(null);
+      setStudents(prev => prev.filter(s => s.id !== deleteTarget.id));
+    } else {
+      alert('Failed to delete student. Please try again.');
+    }
+  };
+
   return (
     <AdminLayout>
       <div className="p-4 sm:p-6 lg:p-8">
@@ -73,10 +94,16 @@ export default function StudentsPage() {
                     <p className="font-bold text-white text-sm truncate">{s.name}</p>
                     <p className="text-slate-400 text-xs">{s.standard} · <span className="text-yellow-400">{s.coins} coins</span> · <span className="text-orange-400">{s.streak_days}d</span></p>
                   </div>
-                  <button onClick={() => openStudent(s)}
-                    className="text-xs bg-purple-900/60 text-purple-300 hover:bg-purple-700 px-3 py-1.5 rounded-lg font-bold transition-all shrink-0">
-                    Details
-                  </button>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <button onClick={() => openStudent(s)}
+                      className="text-xs bg-purple-900/60 text-purple-300 hover:bg-purple-700 px-3 py-1.5 rounded-lg font-bold transition-all">
+                      Details
+                    </button>
+                    <button onClick={() => setDeleteTarget(s)}
+                      className="text-xs bg-red-900/60 text-red-300 hover:bg-red-700 px-2 py-1.5 rounded-lg font-bold transition-all">
+                      <Trash2 size={13} />
+                    </button>
+                  </div>
                 </motion.div>
               ))}
               {students.length === 0 && <div className="text-center py-20 text-slate-500">No students yet.</div>}
@@ -93,7 +120,7 @@ export default function StudentsPage() {
                       <th className="px-6 py-4 font-semibold">Coins</th>
                       <th className="px-6 py-4 font-semibold">Streak</th>
                       <th className="px-6 py-4 font-semibold">Joined</th>
-                      <th className="px-6 py-4 font-semibold">Action</th>
+                      <th className="px-6 py-4 font-semibold">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -113,10 +140,16 @@ export default function StudentsPage() {
                         <td className="px-6 py-4 text-orange-400 font-bold">{s.streak_days}d</td>
                         <td className="px-6 py-4 text-slate-400">{new Date(s.created_at).toLocaleDateString()}</td>
                         <td className="px-6 py-4">
-                          <button onClick={() => openStudent(s)}
-                            className="text-xs bg-purple-900/60 text-purple-300 hover:bg-purple-700 px-3 py-1.5 rounded-lg font-bold transition-all">
-                            Details
-                          </button>
+                          <div className="flex items-center gap-2">
+                            <button onClick={() => openStudent(s)}
+                              className="text-xs bg-purple-900/60 text-purple-300 hover:bg-purple-700 px-3 py-1.5 rounded-lg font-bold transition-all">
+                              Details
+                            </button>
+                            <button onClick={() => setDeleteTarget(s)}
+                              className="text-xs bg-red-900/60 text-red-300 hover:bg-red-700 px-3 py-1.5 rounded-lg font-bold transition-all flex items-center gap-1">
+                              <Trash2 size={12} /> Delete
+                            </button>
+                          </div>
                         </td>
                       </motion.tr>
                     ))}
@@ -148,7 +181,13 @@ export default function StudentsPage() {
                     <p className="text-slate-400 text-sm">{selected.standard}</p>
                   </div>
                 </div>
-                <button onClick={() => setSelected(null)} className="text-slate-400 hover:text-white p-1"><X size={20} /></button>
+                <div className="flex items-center gap-2">
+                  <button onClick={() => setDeleteTarget(selected)}
+                    className="text-red-400 hover:text-red-300 hover:bg-red-900/40 p-2 rounded-lg transition-all">
+                    <Trash2 size={17} />
+                  </button>
+                  <button onClick={() => setSelected(null)} className="text-slate-400 hover:text-white p-1"><X size={20} /></button>
+                </div>
               </div>
 
               <div className="grid grid-cols-3 gap-3 mb-5">
@@ -192,6 +231,42 @@ export default function StudentsPage() {
                   </ResponsiveContainer>
                 </div>
               )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Delete Confirmation Modal */}
+      <AnimatePresence>
+        {deleteTarget && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/70 flex items-center justify-center z-[60] px-4">
+            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-slate-800 rounded-3xl p-8 w-full max-w-sm border border-red-900/50 text-center">
+              <div className="w-14 h-14 bg-red-900/40 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <AlertTriangle size={28} className="text-red-400" />
+              </div>
+              <h3 className="text-xl font-black text-white mb-2">Delete Student?</h3>
+              <p className="text-slate-400 text-sm mb-1">
+                You are about to permanently delete <span className="text-white font-bold">{deleteTarget.name}</span>.
+              </p>
+              <p className="text-slate-500 text-xs mb-6">
+                All their quiz attempts, activity logs, and coins will also be deleted. This cannot be undone.
+              </p>
+              <div className="flex gap-3">
+                <button onClick={() => setDeleteTarget(null)} disabled={deleting}
+                  className="flex-1 border-2 border-slate-600 text-slate-300 hover:border-slate-500 font-bold py-3 rounded-xl transition-all">
+                  Cancel
+                </button>
+                <button onClick={handleDelete} disabled={deleting}
+                  className="flex-1 bg-red-600 hover:bg-red-500 text-white font-bold py-3 rounded-xl transition-all disabled:opacity-60 flex items-center justify-center gap-2">
+                  {deleting ? (
+                    <span className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+                  ) : (
+                    <><Trash2 size={15} /> Delete</>
+                  )}
+                </button>
+              </div>
             </motion.div>
           </motion.div>
         )}

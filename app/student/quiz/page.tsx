@@ -2,15 +2,16 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import { QuizQuestion, STANDARDS, SUBJECTS } from '@/lib/types';
-import { ArrowLeft, CheckCircle, XCircle, Coins } from 'lucide-react';
+import { QuizQuestion } from '@/lib/types';
+import { ArrowLeft, CheckCircle, XCircle, Coins, Lock } from 'lucide-react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 
 export default function QuizPage() {
   const router = useRouter();
   const [userId, setUserId] = useState<string | null>(null);
-  const [standard, setStandard] = useState('');
+  const [studentStandard, setStudentStandard] = useState('');
+  const [studentSubjects, setStudentSubjects] = useState<string[]>([]);
   const [subject, setSubject] = useState('');
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [current, setCurrent] = useState(0);
@@ -19,26 +20,33 @@ export default function QuizPage() {
   const [score, setScore] = useState(0);
   const [totalCoins, setTotalCoins] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [profileLoading, setProfileLoading] = useState(true);
 
   useEffect(() => {
     fetch('/api/student/me').then(r => r.json()).then(d => {
-      if (d.student) setUserId(d.student.id);
-      else router.push('/student/login');
+      if (d.student) {
+        setUserId(d.student.id);
+        setStudentStandard(d.student.standard || '');
+        setStudentSubjects(d.student.subjects || []);
+      } else {
+        router.push('/student/login');
+      }
+      setProfileLoading(false);
     });
   }, [router]);
 
   const startQuiz = async () => {
-    if (!standard || !subject) return;
+    if (!studentStandard || !subject) return;
     setLoading(true);
     const { data } = await supabase
       .from('quiz_questions')
       .select('*')
-      .eq('standard', standard)
+      .eq('standard', studentStandard)
       .eq('subject', subject)
       .limit(10);
     setLoading(false);
     if (!data || data.length === 0) {
-      alert('No questions available for this selection yet.');
+      alert('No questions available for this subject yet. Please try another subject.');
       return;
     }
     setQuestions(data);
@@ -100,6 +108,12 @@ export default function QuizPage() {
     await supabase.from('students').update({ streak_days: newStreak }).eq('id', uid);
   };
 
+  if (profileLoading) return (
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <div className="w-12 h-12 border-4 border-[#0ea5e9] border-t-transparent rounded-full animate-spin" />
+    </div>
+  );
+
   if (phase === 'select') return (
     <div className="min-h-screen bg-slate-50 px-4 py-10">
       <div className="max-w-lg mx-auto">
@@ -108,26 +122,32 @@ export default function QuizPage() {
         </Link>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-white rounded-3xl shadow-lg p-8">
           <h1 className="text-3xl font-black text-slate-800 mb-2">Start a Quiz</h1>
-          <p className="text-slate-500 mb-8">Select your standard and subject to begin.</p>
+          <p className="text-slate-500 mb-8">Choose a subject from your enrolled subjects to begin.</p>
           <div className="space-y-5">
             <div>
               <label className="block text-sm font-bold text-slate-600 mb-2">Standard</label>
-              <select value={standard} onChange={e => setStandard(e.target.value)}
-                className="w-full border-2 border-slate-200 rounded-xl px-4 py-3 font-medium focus:outline-none focus:border-[#0ea5e9] bg-white">
-                <option value="">Select standard</option>
-                {STANDARDS.map(s => <option key={s} value={s}>{s}</option>)}
-              </select>
+              <div className="w-full border-2 border-slate-200 rounded-xl px-4 py-3 font-medium bg-slate-50 text-slate-700 flex items-center justify-between">
+                <span>{studentStandard || 'Not set'}</span>
+                <Lock size={15} className="text-slate-400" />
+              </div>
+              <p className="text-xs text-slate-400 mt-1.5">Your standard is fixed based on your profile.</p>
             </div>
             <div>
               <label className="block text-sm font-bold text-slate-600 mb-2">Subject</label>
-              <select value={subject} onChange={e => setSubject(e.target.value)}
-                className="w-full border-2 border-slate-200 rounded-xl px-4 py-3 font-medium focus:outline-none focus:border-[#0ea5e9] bg-white">
-                <option value="">Select subject</option>
-                {SUBJECTS.map(s => <option key={s} value={s}>{s}</option>)}
-              </select>
+              {studentSubjects.length === 0 ? (
+                <div className="w-full border-2 border-amber-200 bg-amber-50 rounded-xl px-4 py-3 text-amber-700 text-sm font-medium">
+                  No subjects enrolled. Please update your profile.
+                </div>
+              ) : (
+                <select value={subject} onChange={e => setSubject(e.target.value)}
+                  className="w-full border-2 border-slate-200 rounded-xl px-4 py-3 font-medium focus:outline-none focus:border-[#0ea5e9] bg-white">
+                  <option value="">Select subject</option>
+                  {studentSubjects.map(s => <option key={s} value={s}>{s}</option>)}
+                </select>
+              )}
             </div>
             <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
-              onClick={startQuiz} disabled={!standard || !subject || loading}
+              onClick={startQuiz} disabled={!subject || loading || studentSubjects.length === 0}
               className="w-full bg-gradient-to-r from-[#0ea5e9] to-[#22c55e] text-white font-black py-4 rounded-2xl shadow-lg disabled:opacity-50 text-lg">
               {loading ? 'Loading...' : 'Start Quiz →'}
             </motion.button>
@@ -149,7 +169,7 @@ export default function QuizPage() {
           <span className="text-2xl font-black text-yellow-600">+{totalCoins} coins earned!</span>
         </div>
         <div className="flex gap-3">
-          <button onClick={() => setPhase('select')} className="flex-1 border-2 border-slate-200 text-slate-700 font-bold py-3 rounded-xl hover:border-slate-300 transition-all">Play Again</button>
+          <button onClick={() => { setPhase('select'); setSubject(''); }} className="flex-1 border-2 border-slate-200 text-slate-700 font-bold py-3 rounded-xl hover:border-slate-300 transition-all">Play Again</button>
           <Link href="/student/dashboard" className="flex-1 bg-[#0ea5e9] text-white font-bold py-3 rounded-xl hover:bg-sky-600 transition-all text-center">Dashboard</Link>
         </div>
       </motion.div>
