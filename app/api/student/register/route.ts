@@ -6,7 +6,7 @@ import { signStudentToken } from '@/lib/student-auth';
 export async function POST(request: Request) {
   const { name, username, password, standard, subjects } = await request.json();
 
-  if (!name || !username || !password || !standard || !subjects?.length) {
+  if (!name || !username || !password || !standard) {
     return NextResponse.json({ error: 'All fields are required.' }, { status: 400 });
   }
 
