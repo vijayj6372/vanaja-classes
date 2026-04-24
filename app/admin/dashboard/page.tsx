@@ -258,7 +258,7 @@ export default function AdminDashboard() {
                     data={attemptsByStandard} dataKey="attempts" nameKey="standard"
                     cx="50%" cy="50%" outerRadius={80} innerRadius={40}
                     paddingAngle={3}
-                    label={({ standard, percent }) => `${standard.replace('Standard ', 'Std ')} ${(percent * 100).toFixed(0)}%`}
+                    label={({ name, percent }: { name?: string; percent?: number }) => `${(name || '').replace('Standard ', 'Std ')} ${(((percent || 0) * 100).toFixed(0))}%`}
                     labelLine={false}
                   >
                     {attemptsByStandard.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}

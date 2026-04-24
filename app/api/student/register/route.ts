@@ -39,7 +39,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  const token = signStudentToken({ id: student.id, username: student.username, name: student.name });
+  const token = signStudentToken({ id: student.id, username: student.username, name: student.name, standard: student.standard });
 
   const response = NextResponse.json({ success: true, student });
   response.cookies.set('student_session', token, {

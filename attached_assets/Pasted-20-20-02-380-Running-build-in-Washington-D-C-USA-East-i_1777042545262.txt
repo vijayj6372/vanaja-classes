@@ -1,0 +1,43 @@
+20:20:02.380 Running build in Washington, D.C., USA (East) – iad1
+20:20:02.380 Build machine configuration: 2 cores, 8 GB
+20:20:02.494 Cloning github.com/vijayj6372/vanaja-classes (Branch: main, Commit: b65bf12)
+20:20:02.495 Previous build caches not available.
+20:20:05.887 Cloning completed: 3.393s
+20:20:06.422 Running "vercel build"
+20:20:07.132 Vercel CLI 51.6.1
+20:20:07.410 Installing dependencies...
+20:20:21.776 
+20:20:21.776 added 437 packages in 14s
+20:20:21.777 
+20:20:21.777 149 packages are looking for funding
+20:20:21.777   run `npm fund` for details
+20:20:21.837 Detected Next.js version: 16.1.6
+20:20:21.844 Running "npm run build"
+20:20:21.967 
+20:20:21.968 > my-app@0.1.0 build
+20:20:21.969 > next build
+20:20:21.969 
+20:20:22.811 Attention: Next.js now collects completely anonymous telemetry regarding usage.
+20:20:22.812 This information is used to shape Next.js' roadmap and prioritize features.
+20:20:22.812 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+20:20:22.812 https://nextjs.org/telemetry
+20:20:22.816 
+20:20:22.827 ▲ Next.js 16.1.6 (Turbopack)
+20:20:22.828 
+20:20:22.869   Creating an optimized production build ...
+20:20:40.722 ✓ Compiled successfully in 17.3s
+20:20:40.726   Running TypeScript ...
+20:20:47.959 Failed to compile.
+20:20:47.959 
+20:20:47.960 ./app/admin/dashboard/page.tsx:261:31
+20:20:47.960 Type error: Property 'standard' does not exist on type 'PieLabelRenderProps'.
+20:20:47.960 
+20:20:47.960 [0m [90m 259 |[39m                     cx[33m=[39m[32m"50%"[39m cy[33m=[39m[32m"50%"[39m outerRadius[33m=[39m{[35m80[39m} innerRadius[33m=[39m{[35m40[39m}
+20:20:47.960  [90m 260 |[39m                     paddingAngle[33m=[39m{[35m3[39m}
+20:20:47.961 [31m[1m>[22m[39m[90m 261 |[39m                     label[33m=[39m{({ standard[33m,[39m percent }) [33m=>[39m [32m`${standard.replace('Standard ', 'Std ')} ${(percent * 100).toFixed(0)}%`[39m}
+20:20:47.961  [90m     |[39m                               [31m[1m^[22m[39m
+20:20:47.961  [90m 262 |[39m                     labelLine[33m=[39m{[36mfalse[39m}
+20:20:47.961  [90m 263 |[39m                   [33m>[39m
+20:20:47.962  [90m 264 |[39m                     {attemptsByStandard[33m.[39mmap((_[33m,[39m i) [33m=>[39m [33m<[39m[33mCell[39m key[33m=[39m{i} fill[33m=[39m{[33mCOLORS[39m[i [33m%[39m [33mCOLORS[39m[33m.[39mlength]} [33m/[39m[33m>[39m)}[0m
+20:20:48.005 Next.js build worker exited with code: 1 and signal: null
+20:20:48.062 Error: Command "npm run build" exited with 1
