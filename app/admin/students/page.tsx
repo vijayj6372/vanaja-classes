@@ -31,25 +31,36 @@ export default function StudentsPage() {
     setAccuracy(null);
     setLastActive(null);
 
-    const { data: attempts } = await supabase
-      .from('quiz_attempts')
-      .select('is_correct, coins_earned, question_id')
-      .eq('student_id', student.id);
+    const [attemptsRes, logsRes] = await Promise.all([
+      supabase
+        .from('quiz_attempts')
+        .select('is_correct, coins_earned, quiz_questions(subject)')
+        .eq('student_id', student.id),
+      supabase
+        .from('activity_logs').select('date').eq('student_id', student.id)
+        .order('date', { ascending: false }).limit(1),
+    ]);
 
-    if (attempts && attempts.length > 0) {
-      const correct = attempts.filter(a => a.is_correct).length;
+    const attempts = attemptsRes.data || [];
+
+    if (attempts.length > 0) {
+      const correct = attempts.filter((a: any) => a.is_correct).length;
       setAccuracy(Math.round((correct / attempts.length) * 100));
     }
 
-    const { data: logs } = await supabase
-      .from('activity_logs').select('date').eq('student_id', student.id)
-      .order('date', { ascending: false }).limit(1);
-    setLastActive(logs?.[0]?.date || null);
+    setLastActive(logsRes.data?.[0]?.date || null);
 
-    const sc = student.subjects?.map(sub => ({
-      subject: sub,
-      coins: Math.floor((student.coins || 0) / Math.max(student.subjects?.length || 1, 1)),
-    })) || [];
+    // Accurate: coins per subject from actual quiz attempt data
+    const subjectCoinMap: Record<string, number> = {};
+    attempts.forEach((a: any) => {
+      const subject = a.quiz_questions?.subject;
+      if (subject) {
+        subjectCoinMap[subject] = (subjectCoinMap[subject] || 0) + (a.coins_earned || 0);
+      }
+    });
+    const sc = Object.entries(subjectCoinMap)
+      .map(([subject, coins]) => ({ subject, coins }))
+      .sort((a, b) => b.coins - a.coins);
     setSubjectCoins(sc);
   };
 
