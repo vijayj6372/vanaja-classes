@@ -1,0 +1,86 @@
+
+> my-app@0.1.0 dev
+> next dev -p 5000 -H 0.0.0.0
+
+[1G[0K[1m[38;2;173;127;168m▲ Next.js 16.1.6[39m[22m (Turbopack)
+- Local:         http://localhost:5000
+- Network:       http://0.0.0.0:5000
+
+[32m[1m✓[22m[39m Starting...
+[32m[1m✓[22m[39m Ready in 14.4s
+ GET / [32m200[39m in 137ms[2m (compile: 9ms, render: 128ms)[22m
+[33m[1m⚠[22m[39m Blocked cross-origin request from ea9199e9-2e28-46df-814b-814bcbf14db2-00-mwlxzz0osb55.riker.replit.dev to /_next/* resource. To allow this, configure "allowedDevOrigins" in next.config
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ GET /student/login [32m200[39m in 583ms[2m (compile: 508ms, proxy.ts: 53ms, render: 22ms)[22m
+ POST /api/student/login [33m401[39m in 3.5s[2m (compile: 2.1s, render: 1419ms)[22m
+ GET /student/login [32m200[39m in 81ms[2m (compile: 6ms, proxy.ts: 5ms, render: 70ms)[22m
+ POST /api/student/register [32m200[39m in 2.4s[2m (compile: 899ms, render: 1537ms)[22m
+ GET /student/dashboard [32m200[39m in 641ms[2m (compile: 606ms, proxy.ts: 7ms, render: 28ms)[22m
+ GET /api/student/me [32m200[39m in 433ms[2m (compile: 117ms, render: 317ms)[22m
+ GET /api/student/me [32m200[39m in 287ms[2m (compile: 1924µs, render: 285ms)[22m
+ GET /api/student/activity?id=a8645ea8-7a0e-4ac7-8aa4-01d772556cab [32m200[39m in 389ms[2m (compile: 51ms, render: 338ms)[22m
+ GET /api/student/rank?id=a8645ea8-7a0e-4ac7-8aa4-01d772556cab [32m200[39m in 897ms[2m (compile: 75ms, render: 823ms)[22m
+ GET /api/student/activity?id=a8645ea8-7a0e-4ac7-8aa4-01d772556cab [32m200[39m in 274ms[2m (compile: 2ms, render: 272ms)[22m
+ GET /api/student/rank?id=a8645ea8-7a0e-4ac7-8aa4-01d772556cab [32m200[39m in 285ms[2m (compile: 2ms, render: 282ms)[22m
+ GET /student/dashboard [32m200[39m in 61ms[2m (compile: 3ms, proxy.ts: 4ms, render: 54ms)[22m
+ GET /api/student/me [32m200[39m in 412ms[2m (compile: 2ms, render: 409ms)[22m
+ GET /api/student/rank?id=a8645ea8-7a0e-4ac7-8aa4-01d772556cab [32m200[39m in 275ms[2m (compile: 3ms, render: 271ms)[22m
+ GET /api/student/activity?id=a8645ea8-7a0e-4ac7-8aa4-01d772556cab [32m200[39m in 742ms[2m (compile: 7ms, render: 735ms)[22m
+ GET /student/quiz [32m200[39m in 1268ms[2m (compile: 1239ms, proxy.ts: 5ms, render: 24ms)[22m
+ GET /api/student/me [32m200[39m in 815ms[2m (compile: 2ms, render: 812ms)[22m
+ GET /api/student/me [32m200[39m in 298ms[2m (compile: 1728µs, render: 296ms)[22m
+ GET /student/dashboard [32m200[39m in 25ms[2m (compile: 3ms, proxy.ts: 4ms, render: 18ms)[22m
+ GET /api/student/me [32m200[39m in 726ms[2m (compile: 2ms, render: 724ms)[22m
+ GET /api/student/me [32m200[39m in 266ms[2m (compile: 1981µs, render: 264ms)[22m
+ GET /api/student/activity?id=a8645ea8-7a0e-4ac7-8aa4-01d772556cab [32m200[39m in 294ms[2m (compile: 1714µs, render: 292ms)[22m
+ GET /api/student/rank?id=a8645ea8-7a0e-4ac7-8aa4-01d772556cab [32m200[39m in 711ms[2m (compile: 4ms, render: 707ms)[22m
+ GET /api/student/activity?id=a8645ea8-7a0e-4ac7-8aa4-01d772556cab [32m200[39m in 265ms[2m (compile: 2ms, render: 263ms)[22m
+ GET /api/student/rank?id=a8645ea8-7a0e-4ac7-8aa4-01d772556cab [32m200[39m in 274ms[2m (compile: 1674µs, render: 273ms)[22m
+ GET /student/quiz [32m200[39m in 30ms[2m (compile: 6ms, proxy.ts: 4ms, render: 20ms)[22m
+ GET /api/student/me [32m200[39m in 265ms[2m (compile: 3ms, render: 262ms)[22m
+ GET /api/student/me [32m200[39m in 274ms[2m (compile: 1851µs, render: 272ms)[22m
+ GET /student/quiz [32m200[39m in 110ms[2m (compile: 3ms, proxy.ts: 3ms, render: 104ms)[22m
+ GET /api/student/me [32m200[39m in 382ms[2m (compile: 2ms, render: 380ms)[22m
+ GET /student/dashboard [32m200[39m in 29ms[2m (compile: 4ms, proxy.ts: 5ms, render: 20ms)[22m
+ GET /student/dashboard [32m200[39m in 27ms[2m (compile: 3ms, proxy.ts: 4ms, render: 19ms)[22m
+ GET /api/student/me [32m200[39m in 532ms[2m (compile: 1634µs, render: 530ms)[22m
+ GET /api/student/me [32m200[39m in 271ms[2m (compile: 3ms, render: 268ms)[22m
+ GET /api/student/activity?id=a8645ea8-7a0e-4ac7-8aa4-01d772556cab [32m200[39m in 288ms[2m (compile: 1434µs, render: 286ms)[22m
+ GET /api/student/rank?id=a8645ea8-7a0e-4ac7-8aa4-01d772556cab [32m200[39m in 758ms[2m (compile: 2ms, render: 755ms)[22m
+ GET /api/student/activity?id=a8645ea8-7a0e-4ac7-8aa4-01d772556cab [32m200[39m in 265ms[2m (compile: 3ms, render: 262ms)[22m
+ GET /api/student/rank?id=a8645ea8-7a0e-4ac7-8aa4-01d772556cab [32m200[39m in 270ms[2m (compile: 3ms, render: 267ms)[22m
+ GET /student/leaderboard [32m200[39m in 78ms[2m (compile: 48ms, proxy.ts: 6ms, render: 24ms)[22m
+ GET /api/student/me [32m200[39m in 729ms[2m (compile: 1676µs, render: 728ms)[22m
+ GET /api/student/me [32m200[39m in 257ms[2m (compile: 1719µs, render: 255ms)[22m
+ GET /student/dashboard [32m200[39m in 30ms[2m (compile: 3ms, proxy.ts: 4ms, render: 23ms)[22m
+ GET /api/student/me [32m200[39m in 399ms[2m (compile: 1889µs, render: 397ms)[22m
+ GET /api/student/me [32m200[39m in 289ms[2m (compile: 1933µs, render: 287ms)[22m
+ GET /api/student/activity?id=a8645ea8-7a0e-4ac7-8aa4-01d772556cab [32m200[39m in 293ms[2m (compile: 1553µs, render: 291ms)[22m
+ GET /api/student/rank?id=a8645ea8-7a0e-4ac7-8aa4-01d772556cab [32m200[39m in 318ms[2m (compile: 1640µs, render: 316ms)[22m
+ GET /api/student/activity?id=a8645ea8-7a0e-4ac7-8aa4-01d772556cab [32m200[39m in 281ms[2m (compile: 3ms, render: 278ms)[22m
+ GET /api/student/rank?id=a8645ea8-7a0e-4ac7-8aa4-01d772556cab [32m200[39m in 320ms[2m (compile: 3ms, render: 317ms)[22m
+ GET /student/dashboard [32m200[39m in 54ms[2m (compile: 5ms, proxy.ts: 4ms, render: 45ms)[22m
+ GET /api/student/me [32m200[39m in 325ms[2m (compile: 2ms, render: 323ms)[22m
+ GET /api/student/activity?id=a8645ea8-7a0e-4ac7-8aa4-01d772556cab [32m200[39m in 276ms[2m (compile: 4ms, render: 272ms)[22m
+ GET /api/student/rank?id=a8645ea8-7a0e-4ac7-8aa4-01d772556cab [32m200[39m in 301ms[2m (compile: 1758µs, render: 299ms)[22m
+ GET /admin [34m307[39m in 254ms[2m (compile: 154ms, proxy.ts: 4ms, render: 96ms)[22m
+ GET /admin/login [32m200[39m in 480ms[2m (compile: 409ms, proxy.ts: 3ms, render: 68ms)[22m
+ GET /admin/login [32m200[39m in 40ms[2m (compile: 2ms, proxy.ts: 3ms, render: 35ms)[22m
+ POST /api/admin/login [32m200[39m in 258ms[2m (compile: 247ms, render: 11ms)[22m
+ GET /admin/dashboard [32m200[39m in 1423ms[2m (compile: 1397ms, proxy.ts: 3ms, render: 23ms)[22m
+ GET /admin/dashboard [32m200[39m in 200ms[2m (compile: 3ms, proxy.ts: 4ms, render: 193ms)[22m
+ GET /admin/questions [32m200[39m in 811ms[2m (compile: 790ms, proxy.ts: 3ms, render: 18ms)[22m
+ GET /admin/students [32m200[39m in 569ms[2m (compile: 542ms, proxy.ts: 5ms, render: 22ms)[22m
+ DELETE /api/admin/delete-student [32m200[39m in 710ms[2m (compile: 206ms, render: 504ms)[22m
+ GET /admin/dashboard [32m200[39m in 33ms[2m (compile: 9ms, proxy.ts: 5ms, render: 20ms)[22m
+ GET /admin/create-student [32m200[39m in 236ms[2m (compile: 212ms, proxy.ts: 3ms, render: 21ms)[22m
+ GET /admin/create-student [32m200[39m in 80ms[2m (compile: 3ms, proxy.ts: 3ms, render: 74ms)[22m
+ POST /api/admin/create-student [32m200[39m in 1270ms[2m (compile: 133ms, render: 1137ms)[22m
+ GET /admin/create-student [32m200[39m in 55ms[2m (compile: 4ms, proxy.ts: 3ms, render: 47ms)[22m
+ GET /admin/students [32m200[39m in 24ms[2m (compile: 3ms, proxy.ts: 3ms, render: 19ms)[22m
+ GET /admin/students [32m200[39m in 24ms[2m (compile: 4ms, proxy.ts: 4ms, render: 16ms)[22m
+ GET /admin/dashboard [32m200[39m in 25ms[2m (compile: 4ms, proxy.ts: 3ms, render: 18ms)[22m
+ GET /admin/dashboard [32m200[39m in 62ms[2m (compile: 3ms, proxy.ts: 4ms, render: 55ms)[22m
+ GET /admin/dashboard [32m200[39m in 85ms[2m (compile: 6ms, proxy.ts: 5ms, render: 75ms)[22m
+ GET /admin/dashboard [32m200[39m in 56ms[2m (compile: 4ms, proxy.ts: 5ms, render: 48ms)[22m
+ GET /admin/dashboard [32m200[39m in 50ms[2m (compile: 3ms, proxy.ts: 3ms, render: 45ms)[22m

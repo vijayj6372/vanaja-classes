@@ -1,0 +1,42 @@
+
+> my-app@0.1.0 dev
+> next dev -p 5000 -H 0.0.0.0
+
+[1G[0K[1m[38;2;173;127;168m▲ Next.js 16.1.6[39m[22m (Turbopack)
+- Local:         http://localhost:5000
+- Network:       http://0.0.0.0:5000
+
+[32m[1m✓[22m[39m Starting...
+[32m[1m✓[22m[39m Ready in 1095ms
+ GET / [32m200[39m in 2.5s[2m (compile: 2.1s, render: 443ms)[22m
+ GET /admin/login [32m200[39m in 183ms[2m (compile: 44ms, proxy.ts: 3ms, render: 136ms)[22m
+ GET / [32m200[39m in 115ms[2m (compile: 5ms, render: 111ms)[22m
+[33m[1m⚠[22m[39m Blocked cross-origin request from ea9199e9-2e28-46df-814b-814bcbf14db2-00-mwlxzz0osb55.riker.replit.dev to /_next/* resource. To allow this, configure "allowedDevOrigins" in next.config
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ GET /student/login [32m200[39m in 77ms[2m (compile: 50ms, proxy.ts: 5ms, render: 22ms)[22m
+ POST /api/student/login [32m200[39m in 1277ms[2m (compile: 151ms, render: 1127ms)[22m
+ GET /student/dashboard [32m200[39m in 77ms[2m (compile: 49ms, proxy.ts: 6ms, render: 22ms)[22m
+ GET /api/student/me [32m200[39m in 381ms[2m (compile: 41ms, render: 340ms)[22m
+ GET /api/student/me [32m200[39m in 280ms[2m (compile: 2ms, render: 278ms)[22m
+ GET /api/student/activity?id=891dbbcc-3717-4761-9089-38392a4af75c [32m200[39m in 406ms[2m (compile: 49ms, render: 356ms)[22m
+ GET /api/student/rank?id=891dbbcc-3717-4761-9089-38392a4af75c [32m200[39m in 856ms[2m (compile: 76ms, render: 779ms)[22m
+ GET /api/student/activity?id=891dbbcc-3717-4761-9089-38392a4af75c [32m200[39m in 300ms[2m (compile: 2ms, render: 298ms)[22m
+ GET /api/student/rank?id=891dbbcc-3717-4761-9089-38392a4af75c [32m200[39m in 291ms[2m (compile: 2ms, render: 289ms)[22m
+ GET /student/quiz [32m200[39m in 259ms[2m (compile: 218ms, proxy.ts: 4ms, render: 37ms)[22m
+ GET /api/student/me [32m200[39m in 841ms[2m (compile: 3ms, render: 839ms)[22m
+ GET /api/student/me [32m200[39m in 286ms[2m (compile: 2ms, render: 284ms)[22m
+ GET /student/quiz [32m200[39m in 121ms[2m (compile: 3ms, proxy.ts: 4ms, render: 114ms)[22m
+ GET /api/student/me [32m200[39m in 312ms[2m (compile: 3ms, render: 309ms)[22m
+ GET / [32m200[39m in 108ms[2m (compile: 3ms, render: 105ms)[22m
+ GET /admin [34m307[39m in 192ms[2m (compile: 118ms, proxy.ts: 5ms, render: 69ms)[22m
+ GET /admin/login [32m200[39m in 70ms[2m (compile: 3ms, proxy.ts: 4ms, render: 63ms)[22m
+ GET /admin/dashboard [32m200[39m in 1207ms[2m (compile: 973ms, proxy.ts: 4ms, render: 230ms)[22m
+ POST /api/admin/login [33m401[39m in 38ms[2m (compile: 32ms, render: 6ms)[22m
+ POST /api/admin/login [32m200[39m in 12ms[2m (compile: 3ms, render: 9ms)[22m
+ GET /admin/dashboard [32m200[39m in 31ms[2m (compile: 4ms, proxy.ts: 5ms, render: 23ms)[22m
+ GET /admin/dashboard [32m200[39m in 53ms[2m (compile: 3ms, proxy.ts: 4ms, render: 46ms)[22m
+ GET /admin/dashboard [32m200[39m in 58ms[2m (compile: 3ms, proxy.ts: 3ms, render: 51ms)[22m
+ GET /admin/questions [32m200[39m in 146ms[2m (compile: 120ms, proxy.ts: 4ms, render: 21ms)[22m
+ GET /admin/create-student [32m200[39m in 57ms[2m (compile: 32ms, proxy.ts: 3ms, render: 21ms)[22m
+ GET /admin/create-student [32m200[39m in 74ms[2m (compile: 3ms, proxy.ts: 4ms, render: 66ms)[22m
+ GET /admin/create-student [32m200[39m in 69ms[2m (compile: 4ms, proxy.ts: 3ms, render: 62ms)[22m

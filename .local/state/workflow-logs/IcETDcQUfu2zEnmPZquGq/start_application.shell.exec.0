@@ -1,0 +1,125 @@
+
+> my-app@0.1.0 dev
+> next dev -p 5000 -H 0.0.0.0
+
+[1G[0K[1m[38;2;173;127;168m▲ Next.js 16.1.6[39m[22m (Turbopack)
+- Local:         http://localhost:5000
+- Network:       http://0.0.0.0:5000
+
+[32m[1m✓[22m[39m Starting...
+[32m[1m✓[22m[39m Ready in 1105ms
+ GET / [32m200[39m in 2.5s[2m (compile: 1946ms, render: 504ms)[22m
+ GET /student/login [32m200[39m in 121ms[2m (compile: 53ms, proxy.ts: 4ms, render: 63ms)[22m
+ GET /admin/login [32m200[39m in 101ms[2m (compile: 32ms, proxy.ts: 4ms, render: 66ms)[22m
+ GET / [32m200[39m in 112ms[2m (compile: 6ms, render: 107ms)[22m
+[33m[1m⚠[22m[39m Blocked cross-origin request from ea9199e9-2e28-46df-814b-814bcbf14db2-00-mwlxzz0osb55.riker.replit.dev to /_next/* resource. To allow this, configure "allowedDevOrigins" in next.config
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ GET /admin [34m307[39m in 560ms[2m (compile: 479ms, proxy.ts: 4ms, render: 77ms)[22m
+ GET /admin/login [32m200[39m in 51ms[2m (compile: 4ms, proxy.ts: 5ms, render: 43ms)[22m
+ GET /admin/questions [32m200[39m in 486ms[2m (compile: 347ms, proxy.ts: 3ms, render: 135ms)[22m
+ POST /api/admin/login [32m200[39m in 79ms[2m (compile: 61ms, render: 18ms)[22m
+ GET /admin/dashboard [32m200[39m in 602ms[2m (compile: 555ms, proxy.ts: 5ms, render: 42ms)[22m
+ GET /admin/students [32m200[39m in 250ms[2m (compile: 221ms, proxy.ts: 6ms, render: 23ms)[22m
+ GET /admin/questions [32m200[39m in 29ms[2m (compile: 4ms, proxy.ts: 5ms, render: 20ms)[22m
+ GET /admin/students [32m200[39m in 211ms[2m (compile: 3ms, proxy.ts: 4ms, render: 203ms)[22m
+ GET /admin/create-student [32m200[39m in 474ms[2m (compile: 448ms, proxy.ts: 4ms, render: 22ms)[22m
+ GET /admin/questions [32m200[39m in 29ms[2m (compile: 5ms, proxy.ts: 4ms, render: 20ms)[22m
+ GET /admin/questions [32m200[39m in 65ms[2m (compile: 4ms, proxy.ts: 3ms, render: 57ms)[22m
+ GET /admin/questions [32m200[39m in 55ms[2m (compile: 4ms, proxy.ts: 3ms, render: 47ms)[22m
+ GET /admin/questions [32m200[39m in 55ms[2m (compile: 4ms, proxy.ts: 3ms, render: 48ms)[22m
+ GET /admin/questions [32m200[39m in 28ms[2m (compile: 5ms, proxy.ts: 4ms, render: 20ms)[22m
+ GET /admin/questions [32m200[39m in 65ms[2m (compile: 5ms, proxy.ts: 4ms, render: 56ms)[22m
+ GET /admin/questions [32m200[39m in 54ms[2m (compile: 3ms, proxy.ts: 5ms, render: 46ms)[22m
+ GET /admin/create-student [32m200[39m in 29ms[2m (compile: 7ms, proxy.ts: 3ms, render: 19ms)[22m
+ GET /admin/dashboard [32m200[39m in 31ms[2m (compile: 4ms, proxy.ts: 4ms, render: 23ms)[22m
+ GET /admin/students [32m200[39m in 29ms[2m (compile: 4ms, proxy.ts: 3ms, render: 21ms)[22m
+ GET /admin/students [32m200[39m in 69ms[2m (compile: 4ms, proxy.ts: 4ms, render: 61ms)[22m
+ GET /admin/dashboard [32m200[39m in 27ms[2m (compile: 4ms, proxy.ts: 4ms, render: 19ms)[22m
+ GET / [32m200[39m in 109ms[2m (compile: 4ms, render: 105ms)[22m
+ GET /student/login [32m200[39m in 28ms[2m (compile: 6ms, proxy.ts: 3ms, render: 19ms)[22m
+ GET /admin/dashboard [32m200[39m in 109ms[2m (compile: 4ms, proxy.ts: 3ms, render: 103ms)[22m
+ GET /student/login [32m200[39m in 113ms[2m (compile: 5ms, proxy.ts: 59ms, render: 49ms)[22m
+ POST /api/student/register [32m200[39m in 834ms[2m (compile: 92ms, render: 743ms)[22m
+ POST /api/student/login [32m200[39m in 1302ms[2m (compile: 51ms, render: 1251ms)[22m
+ GET /student/dashboard [32m200[39m in 66ms[2m (compile: 40ms, proxy.ts: 4ms, render: 21ms)[22m
+ GET /api/student/me [32m200[39m in 791ms[2m (compile: 46ms, render: 745ms)[22m
+ GET /api/student/me [32m200[39m in 273ms[2m (compile: 1752µs, render: 271ms)[22m
+ GET /api/student/activity?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 408ms[2m (compile: 37ms, render: 370ms)[22m
+ GET /api/student/rank?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 891ms[2m (compile: 61ms, render: 830ms)[22m
+ GET /api/student/activity?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 269ms[2m (compile: 2ms, render: 267ms)[22m
+ GET /api/student/rank?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 276ms[2m (compile: 2ms, render: 273ms)[22m
+ GET /student/quiz [32m200[39m in 96ms[2m (compile: 70ms, proxy.ts: 4ms, render: 21ms)[22m
+ GET /api/student/me [32m200[39m in 788ms[2m (compile: 1712µs, render: 786ms)[22m
+ GET /api/student/me [32m200[39m in 282ms[2m (compile: 2ms, render: 280ms)[22m
+ GET /student/dashboard [32m200[39m in 28ms[2m (compile: 2ms, proxy.ts: 3ms, render: 22ms)[22m
+ GET /api/student/me [32m200[39m in 742ms[2m (compile: 1812µs, render: 740ms)[22m
+ GET /api/student/me [32m200[39m in 287ms[2m (compile: 1851µs, render: 285ms)[22m
+ GET /api/student/activity?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 313ms[2m (compile: 1496µs, render: 311ms)[22m
+ GET /api/student/rank?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 769ms[2m (compile: 1575µs, render: 767ms)[22m
+ GET /api/student/activity?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 277ms[2m (compile: 1761µs, render: 275ms)[22m
+ GET /api/student/rank?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 279ms[2m (compile: 1757µs, render: 277ms)[22m
+ GET /student/leaderboard [32m200[39m in 61ms[2m (compile: 39ms, proxy.ts: 4ms, render: 18ms)[22m
+ GET /api/student/me [32m200[39m in 299ms[2m (compile: 2ms, render: 297ms)[22m
+ GET /api/student/me [32m200[39m in 279ms[2m (compile: 1827µs, render: 277ms)[22m
+ GET /student/dashboard [32m200[39m in 23ms[2m (compile: 3ms, proxy.ts: 3ms, render: 17ms)[22m
+ GET /api/student/me [32m200[39m in 748ms[2m (compile: 3ms, render: 744ms)[22m
+ GET /api/student/me [32m200[39m in 279ms[2m (compile: 1977µs, render: 277ms)[22m
+ GET /api/student/activity?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 291ms[2m (compile: 1390µs, render: 290ms)[22m
+ GET /api/student/rank?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 298ms[2m (compile: 1503µs, render: 296ms)[22m
+ GET /api/student/activity?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 283ms[2m (compile: 1799µs, render: 281ms)[22m
+ GET /api/student/rank?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 245ms[2m (compile: 1607µs, render: 243ms)[22m
+ GET /student/quiz [32m200[39m in 25ms[2m (compile: 3ms, proxy.ts: 3ms, render: 19ms)[22m
+ GET /api/student/me [32m200[39m in 275ms[2m (compile: 1596µs, render: 273ms)[22m
+ GET /api/student/me [32m200[39m in 264ms[2m (compile: 3ms, render: 262ms)[22m
+ GET /student/quiz [32m200[39m in 73ms[2m (compile: 5ms, proxy.ts: 4ms, render: 65ms)[22m
+ GET /api/student/me [32m200[39m in 334ms[2m (compile: 2ms, render: 332ms)[22m
+ GET /student/dashboard [32m200[39m in 26ms[2m (compile: 6ms, proxy.ts: 3ms, render: 18ms)[22m
+ GET /api/student/me [32m200[39m in 295ms[2m (compile: 3ms, render: 292ms)[22m
+ GET /api/student/me [32m200[39m in 251ms[2m (compile: 2ms, render: 249ms)[22m
+ GET /api/student/rank?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 290ms[2m (compile: 1281µs, render: 289ms)[22m
+ GET /api/student/activity?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 319ms[2m (compile: 4ms, render: 315ms)[22m
+ GET /api/student/rank?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 249ms[2m (compile: 2ms, render: 247ms)[22m
+ GET /api/student/activity?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 282ms[2m (compile: 1714µs, render: 280ms)[22m
+ GET /student/leaderboard [32m200[39m in 24ms[2m (compile: 3ms, proxy.ts: 3ms, render: 18ms)[22m
+ GET /student/quiz [32m200[39m in 28ms[2m (compile: 4ms, proxy.ts: 3ms, render: 21ms)[22m
+ GET /api/student/me [32m200[39m in 728ms[2m (compile: 1929µs, render: 726ms)[22m
+ GET /api/student/me [32m200[39m in 249ms[2m (compile: 1722µs, render: 248ms)[22m
+ GET / [32m200[39m in 110ms[2m (compile: 4ms, render: 107ms)[22m
+ GET /student/login [32m200[39m in 25ms[2m (compile: 3ms, proxy.ts: 4ms, render: 19ms)[22m
+ GET /student/login [32m200[39m in 49ms[2m (compile: 3ms, proxy.ts: 3ms, render: 43ms)[22m
+ GET /student/quiz [32m200[39m in 45ms[2m (compile: 4ms, proxy.ts: 3ms, render: 38ms)[22m
+ GET /api/student/me [32m200[39m in 566ms[2m (compile: 1918µs, render: 564ms)[22m
+ POST /api/student/register [33m409[39m in 727ms[2m (compile: 1984µs, render: 725ms)[22m
+ GET /student/login [32m200[39m in 50ms[2m (compile: 5ms, proxy.ts: 3ms, render: 41ms)[22m
+ POST /api/student/login [32m200[39m in 680ms[2m (compile: 3ms, render: 677ms)[22m
+ GET /student/dashboard [32m200[39m in 37ms[2m (compile: 4ms, proxy.ts: 6ms, render: 27ms)[22m
+ GET /api/student/me [32m200[39m in 284ms[2m (compile: 1656µs, render: 282ms)[22m
+ GET /api/student/me [32m200[39m in 265ms[2m (compile: 2ms, render: 263ms)[22m
+ GET /api/student/rank?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 329ms[2m (compile: 3ms, render: 326ms)[22m
+ GET /api/student/activity?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 828ms[2m (compile: 1553µs, render: 826ms)[22m
+ GET /api/student/rank?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 266ms[2m (compile: 1772µs, render: 265ms)[22m
+ GET /api/student/activity?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 256ms[2m (compile: 1888µs, render: 254ms)[22m
+ POST /api/student/logout [32m200[39m in 36ms[2m (compile: 31ms, render: 5ms)[22m
+ GET / [32m200[39m in 28ms[2m (compile: 3ms, render: 25ms)[22m
+ GET /student/login [32m200[39m in 23ms[2m (compile: 3ms, proxy.ts: 3ms, render: 17ms)[22m
+ POST /api/student/login [33m401[39m in 1073ms[2m (compile: 1603µs, render: 1071ms)[22m
+ POST /api/student/login [32m200[39m in 714ms[2m (compile: 1860µs, render: 712ms)[22m
+ GET /student/dashboard [32m200[39m in 27ms[2m (compile: 4ms, proxy.ts: 4ms, render: 19ms)[22m
+ GET /api/student/me [32m200[39m in 273ms[2m (compile: 1892µs, render: 271ms)[22m
+ GET /api/student/me [32m200[39m in 272ms[2m (compile: 4ms, render: 268ms)[22m
+ GET /api/student/activity?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 320ms[2m (compile: 3ms, render: 318ms)[22m
+ GET /api/student/rank?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 320ms[2m (compile: 1594µs, render: 319ms)[22m
+ GET /api/student/rank?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 282ms[2m (compile: 3ms, render: 279ms)[22m
+ GET /api/student/activity?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 281ms[2m (compile: 2ms, render: 279ms)[22m
+ GET /student/quiz [32m200[39m in 26ms[2m (compile: 3ms, proxy.ts: 3ms, render: 20ms)[22m
+ GET /api/student/me [32m200[39m in 297ms[2m (compile: 2ms, render: 294ms)[22m
+ GET /api/student/me [32m200[39m in 275ms[2m (compile: 2ms, render: 273ms)[22m
+ GET /student/quiz [32m200[39m in 49ms[2m (compile: 3ms, proxy.ts: 4ms, render: 42ms)[22m
+ GET /api/student/me [32m200[39m in 307ms[2m (compile: 1709µs, render: 305ms)[22m
+ GET /student/dashboard [32m200[39m in 30ms[2m (compile: 4ms, proxy.ts: 3ms, render: 23ms)[22m
+ GET /api/student/me [32m200[39m in 298ms[2m (compile: 1793µs, render: 296ms)[22m
+ GET /api/student/me [32m200[39m in 275ms[2m (compile: 3ms, render: 272ms)[22m
+ GET /api/student/activity?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 755ms[2m (compile: 1501µs, render: 754ms)[22m
+ GET /api/student/rank?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 756ms[2m (compile: 1364µs, render: 755ms)[22m
+ GET /api/student/activity?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 248ms[2m (compile: 4ms, render: 244ms)[22m
+ GET /api/student/rank?id=c96ae02e-442e-4978-8f8a-6cb6bf6b5c09 [32m200[39m in 255ms[2m (compile: 1948µs, render: 253ms)[22m

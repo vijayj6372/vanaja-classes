@@ -1,0 +1,15 @@
+
+> my-app@0.1.0 dev
+> next dev -p 5000 -H 0.0.0.0
+
+[1G[0K[31m[1m⨯[22m[39m Failed to start server
+Error: listen EADDRINUSE: address already in use 0.0.0.0:5000
+    at <unknown> (Error: listen EADDRINUSE: address already in use 0.0.0.0:5000) {
+  code: [32m'EADDRINUSE'[39m,
+  errno: [33m-98[39m,
+  syscall: [32m'listen'[39m,
+  address: [32m'0.0.0.0'[39m,
+  port: [33m5000[39m
+}
+[?25h
+[1G[0K⠙[1G[0K

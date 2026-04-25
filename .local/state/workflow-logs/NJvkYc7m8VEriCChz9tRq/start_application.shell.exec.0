@@ -1,0 +1,14 @@
+
+> my-app@0.1.0 dev
+> next dev -p 5000 -H 0.0.0.0
+
+[1G[0K[1m[38;2;173;127;168m▲ Next.js 16.1.6[39m[22m (Turbopack)
+- Local:         http://localhost:5000
+- Network:       http://0.0.0.0:5000
+
+[32m[1m✓[22m[39m Starting...
+[32m[1m✓[22m[39m Ready in 8.7s
+[37m[1m○[22m[39m Compiling /admin/create-student ...
+ GET /admin/create-student [32m200[39m in 4.8s[2m (compile: 4.0s, proxy.ts: 527ms, render: 238ms)[22m
+[33m[1m⚠[22m[39m Blocked cross-origin request from ea9199e9-2e28-46df-814b-814bcbf14db2-00-mwlxzz0osb55.riker.replit.dev to /_next/* resource. To allow this, configure "allowedDevOrigins" in next.config
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins

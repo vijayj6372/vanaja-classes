@@ -1,0 +1,50 @@
+[1G[0K⠙[1G[0K
+> my-app@0.1.0 dev
+> next dev -p 5000 -H 0.0.0.0
+
+[1G[0K⠙[1G[0K[1m[38;2;173;127;168m▲ Next.js 16.1.6[39m[22m (Turbopack)
+- Local:         http://localhost:5000
+- Network:       http://0.0.0.0:5000
+
+[32m[1m✓[22m[39m Starting...
+[32m[1m✓[22m[39m Ready in 12.3s
+ GET / [32m200[39m in 3.3s[2m (compile: 2.9s, render: 402ms)[22m
+[33m[1m⚠[22m[39m Blocked cross-origin request from ea9199e9-2e28-46df-814b-814bcbf14db2-00-mwlxzz0osb55.riker.replit.dev to /_next/* resource. To allow this, configure "allowedDevOrigins" in next.config
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ GET /student/login [32m200[39m in 129ms[2m (compile: 57ms, proxy.ts: 50ms, render: 22ms)[22m
+ POST /api/student/login [32m200[39m in 2.1s[2m (compile: 406ms, render: 1700ms)[22m
+ GET /student/dashboard [32m200[39m in 93ms[2m (compile: 66ms, proxy.ts: 7ms, render: 21ms)[22m
+ GET /api/student/me [32m200[39m in 375ms[2m (compile: 53ms, render: 323ms)[22m
+ GET /api/student/me [32m200[39m in 293ms[2m (compile: 2ms, render: 290ms)[22m
+ GET /api/student/activity?id=891dbbcc-3717-4761-9089-38392a4af75c [32m200[39m in 392ms[2m (compile: 44ms, render: 348ms)[22m
+ GET /api/student/rank?id=891dbbcc-3717-4761-9089-38392a4af75c [32m200[39m in 902ms[2m (compile: 67ms, render: 835ms)[22m
+ GET /api/student/activity?id=891dbbcc-3717-4761-9089-38392a4af75c [32m200[39m in 327ms[2m (compile: 2ms, render: 325ms)[22m
+ GET /api/student/rank?id=891dbbcc-3717-4761-9089-38392a4af75c [32m200[39m in 282ms[2m (compile: 3ms, render: 279ms)[22m
+ GET /student/quiz [32m200[39m in 312ms[2m (compile: 289ms, proxy.ts: 4ms, render: 20ms)[22m
+ GET /student/quiz [32m200[39m in 22ms[2m (compile: 3ms, proxy.ts: 3ms, render: 16ms)[22m
+ GET /api/student/me [32m200[39m in 995ms[2m (compile: 3ms, render: 993ms)[22m
+ GET /api/student/me [32m200[39m in 319ms[2m (compile: 2ms, render: 317ms)[22m
+ GET /student/quiz [32m200[39m in 120ms[2m (compile: 4ms, proxy.ts: 3ms, render: 113ms)[22m
+ GET /api/student/me [32m200[39m in 733ms[2m (compile: 3ms, render: 731ms)[22m
+ GET /student/dashboard [32m200[39m in 27ms[2m (compile: 3ms, proxy.ts: 4ms, render: 19ms)[22m
+ GET /student/dashboard [32m200[39m in 23ms[2m (compile: 5ms, proxy.ts: 3ms, render: 15ms)[22m
+ GET /student/dashboard [32m200[39m in 23ms[2m (compile: 4ms, proxy.ts: 4ms, render: 15ms)[22m
+ GET /api/student/me [32m200[39m in 737ms[2m (compile: 1892µs, render: 735ms)[22m
+ GET /api/student/me [32m200[39m in 258ms[2m (compile: 2ms, render: 256ms)[22m
+ GET /api/student/activity?id=891dbbcc-3717-4761-9089-38392a4af75c [32m200[39m in 302ms[2m (compile: 1896µs, render: 300ms)[22m
+ GET /api/student/rank?id=891dbbcc-3717-4761-9089-38392a4af75c [32m200[39m in 716ms[2m (compile: 1898µs, render: 714ms)[22m
+ GET /api/student/activity?id=891dbbcc-3717-4761-9089-38392a4af75c [32m200[39m in 245ms[2m (compile: 1854µs, render: 243ms)[22m
+ GET /api/student/rank?id=891dbbcc-3717-4761-9089-38392a4af75c [32m200[39m in 259ms[2m (compile: 2ms, render: 257ms)[22m
+ POST /api/student/logout [32m200[39m in 49ms[2m (compile: 43ms, render: 7ms)[22m
+ GET / [32m200[39m in 69ms[2m (compile: 4ms, render: 66ms)[22m
+ GET /admin/login [32m200[39m in 111ms[2m (compile: 47ms, proxy.ts: 3ms, render: 62ms)[22m
+ GET / [32m200[39m in 110ms[2m (compile: 4ms, render: 106ms)[22m
+ GET /admin/login [32m200[39m in 46ms[2m (compile: 3ms, proxy.ts: 3ms, render: 41ms)[22m
+ POST /api/admin/login [32m200[39m in 43ms[2m (compile: 35ms, render: 8ms)[22m
+ GET /admin/dashboard [32m200[39m in 916ms[2m (compile: 886ms, proxy.ts: 4ms, render: 26ms)[22m
+ GET /admin/login [32m200[39m in 52ms[2m (compile: 5ms, proxy.ts: 3ms, render: 44ms)[22m
+ POST /api/admin/login [32m200[39m in 8ms[2m (compile: 3ms, render: 5ms)[22m
+ GET /admin/dashboard [32m200[39m in 24ms[2m (compile: 4ms, proxy.ts: 3ms, render: 17ms)[22m
+ GET /admin/create-student [32m200[39m in 210ms[2m (compile: 179ms, proxy.ts: 3ms, render: 27ms)[22m
+ GET /admin/dashboard [32m200[39m in 24ms[2m (compile: 4ms, proxy.ts: 3ms, render: 17ms)[22m
+ GET /admin/dashboard [32m200[39m in 212ms[2m (compile: 4ms, proxy.ts: 6ms, render: 201ms)[22m
